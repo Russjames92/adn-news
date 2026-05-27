@@ -98,12 +98,25 @@
 </nav>
 
 <main>
-  <!-- HERO -->
+  <!-- ABOVE-FOLD FRONT PAGE -->
   <div class="page-wrap" style="padding-bottom:0;">
-    <div id="hero-story" class="hero-story fade-in">
-      <!-- dynamically rendered -->
-      <div class="hero-story-image img-hero"><div style="width:100%;height:440px;" class="skeleton"></div></div>
-      <div class="hero-story-content"><div style="height:200px;" class="skeleton"></div></div>
+    <div class="front-page-grid fade-in">
+
+      <!-- LEFT: 2 secondary stories (text-only, stacked) -->
+      <div class="fp-left" id="fp-left">
+        <div style="height:280px;" class="skeleton" id="fp-left-skeleton"></div>
+      </div>
+
+      <!-- CENTER: hero story with image -->
+      <div class="fp-center" id="fp-center">
+        <div style="height:520px;" class="skeleton" id="fp-center-skeleton"></div>
+      </div>
+
+      <!-- RIGHT: latest headlines list -->
+      <div class="fp-right" id="fp-right">
+        <div style="height:400px;" class="skeleton" id="fp-right-skeleton"></div>
+      </div>
+
     </div>
   </div>
 
@@ -242,7 +255,7 @@
     </div>
   </div>
 </footer>
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=6"></script>
 <script>
 (function () {
   var form = document.getElementById('newsletter-form');

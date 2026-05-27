@@ -254,35 +254,72 @@ function renderArticlePage(articles) {
 
 // ── HOMEPAGE RENDERER ────────────────────────────────────────────────────────
 function renderHomepage(articles) {
-  // HERO — always use the most recent article (index 0)
+  // ── FRONT PAGE 3-COLUMN ABOVE-THE-FOLD ──────────────────────────────────────
   const hero = articles[0];
-  const heroEl = document.getElementById('hero-story');
-  if (heroEl && hero) {
-    const heroImgHtml = hero.img_url
+  const remaining = articles.filter(a => a.slug !== hero.slug);
+
+  // LEFT column — 2 stories (articles[1] and articles[2]), text-only
+  const fpLeft = document.getElementById('fp-left');
+  if (fpLeft && hero) {
+    const leftStories = remaining.slice(0, 2);
+    fpLeft.innerHTML = leftStories.map((a, i) => `
+      <article class="fp-secondary${i === 0 ? ' fp-secondary--border-top' : ''}" data-slug="${safeSlug(a.slug)}">
+        <span class="category-badge ${badgeClass(a.category)} fp-badge">${safe(a.category_label)}</span>
+        <h2 class="fp-secondary-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h2>
+        <p class="fp-secondary-deck">${safe(a.deck)}</p>
+        <span class="fp-secondary-meta">${safe(a.author)} · ${safe(a.date_label)}</span>
+      </article>
+    `).join('<hr class="fp-divider" />');
+  }
+
+  // CENTER column — hero with full image
+  const fpCenter = document.getElementById('fp-center');
+  if (fpCenter && hero) {
+    const imgHtml = hero.img_url
       ? `<img src="${hero.img_url}" alt="${safe(hero.headline)}" loading="eager" />`
-      : articleImg(hero, 'hero');
-    heroEl.innerHTML = `
-      <div class="hero-story-image">
-        ${heroImgHtml}
-      </div>
-      <div class="hero-story-content">
-        <span class="category-badge ${badgeClass(hero.category)}">${safe(hero.category_label)}</span>
-        <h1 class="hero-headline"><a href="article.html?slug=${safeSlug(hero.slug)}">${safe(hero.headline)}</a></h1>
-        <p class="hero-deck">${safe(hero.deck)}</p>
-        <div class="story-meta">
-          <span class="author">By ${safe(hero.author)}</span>
-          <span class="divider">|</span>
-          <span>${safe(hero.date_label)}</span>
-          <span class="divider">|</span>
-          <span>${safe(hero.read_time)}</span>
+      : `<div class="${hero.img_class || 'img-hero'}" style="width:100%;height:100%;"></div>`;
+    fpCenter.innerHTML = `
+      <a href="article.html?slug=${safeSlug(hero.slug)}" class="fp-hero-link">
+        <div class="fp-hero-image">${imgHtml}</div>
+        <div class="fp-hero-content">
+          <span class="category-badge ${badgeClass(hero.category)} fp-badge">${safe(hero.category_label)}</span>
+          <h1 class="fp-hero-headline">${safe(hero.headline)}</h1>
+          <p class="fp-hero-deck">${safe(hero.deck)}</p>
+          <div class="fp-hero-meta">
+            <span>By ${safe(hero.author)}</span>
+            <span class="fp-hero-meta-sep">·</span>
+            <span>${safe(hero.date_label)}</span>
+            <span class="fp-hero-meta-sep">·</span>
+            <span>${safe(hero.read_time)}</span>
+          </div>
         </div>
-        <a href="article.html?slug=${safeSlug(hero.slug)}" class="read-more-btn">Read Full Story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </a>
+    `;
+  }
+
+  // RIGHT column — "Latest" list (articles 3–6)
+  const fpRight = document.getElementById('fp-right');
+  if (fpRight && hero) {
+    const latestStories = remaining.slice(2, 7);
+    fpRight.innerHTML = `
+      <div class="fp-latest-header">Latest</div>
+      <ol class="fp-latest-list">
+        ${latestStories.map(a => `
+          <li class="fp-latest-item" data-slug="${safeSlug(a.slug)}">
+            <span class="category-badge ${badgeClass(a.category)} fp-badge">${safe(a.category_label)}</span>
+            <h3 class="fp-latest-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h3>
+            <span class="fp-latest-meta">${safe(a.date_label)}</span>
+          </li>
+        `).join('')}
+      </ol>
+      <div class="fp-editorial-note">
+        <strong>Note:</strong> ADN News is satirical. All stories are fictional. We poke fun at end-times sensationalism with love.
       </div>
     `;
   }
 
-  // TOP STORIES — next 3 after hero
-  const topStories = articles.filter(a => a.slug !== hero.slug).slice(0, 3);
+  // TOP STORIES — next 3 after the above-fold articles
+  const topStories = remaining.slice(7, 10);
   const topGrid = document.getElementById('top-stories-grid');
   if (topGrid) {
     topGrid.innerHTML = topStories.map(a => `
