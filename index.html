@@ -195,12 +195,16 @@
         <h3>Don't Miss the Rapture — Subscribe</h3>
         <p>Get the latest prophetic developments delivered to your inbox. We promise to write the subject line "THIS IS IT" at least once a week.</p>
       </div>
-      <form class="newsletter-form" id="newsletter-form">
-        <input class="newsletter-input" type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required />
+      <form class="newsletter-form" id="newsletter-form" action="https://api.web3forms.com/submit" method="POST" target="newsletter-hidden-frame">
+        <input type="hidden" name="access_key" value="829221c3-53d5-4f14-9e4f-9f8b8d41c41e" />
+        <input type="hidden" name="subject" value="ADN News — New Subscriber" />
+        <input type="hidden" name="redirect" value="false" />
+        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+        <input class="newsletter-input" type="email" name="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required />
         <button class="newsletter-btn" type="submit" id="newsletter-btn">Subscribe (Just In Case)</button>
       </form>
+      <iframe name="newsletter-hidden-frame" style="display:none;"></iframe>
       <div id="newsletter-success" style="display:none; font-family:var(--font-sans); font-size:var(--text-sm); color:var(--color-text-muted); padding:var(--space-3) 0;">You're subscribed. We'll write the subject line "THIS IS IT" at least once a week.</div>
-      <div id="newsletter-error" style="display:none; font-family:var(--font-sans); font-size:var(--text-sm); color:#9b1c1c; padding:var(--space-3) 0;">Something went wrong. Try again shortly.</div>
     </div>
   </div>
 
@@ -261,37 +265,20 @@
 <script src="js/main.js"></script>
 <script>
 (function () {
-  // Google Apps Script web app URL — replace APPS_SCRIPT_URL_HERE after deploying the script
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVJiy7-sSG4GjQDqkd0WthBdm_vN6-K4RxXlWFyrWq99UZfRsWYZSyae4pvryilhm8/exec';
-
   var form = document.getElementById('newsletter-form');
   if (!form) return;
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('newsletter-email').value.trim();
-    if (!email) return;
-    var btn = document.getElementById('newsletter-btn');
-    btn.disabled = true;
-    btn.textContent = 'Subscribing…';
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: email })
-    })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (data.result === 'success') {
-        form.style.display = 'none';
-        document.getElementById('newsletter-success').style.display = 'block';
-      } else {
-        throw new Error('error');
-      }
-    })
-    .catch(function () {
-      document.getElementById('newsletter-error').style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Subscribe (Just In Case)';
+  var submitted = false;
+  // When the hidden iframe loads after form submit, show success
+  var iframe = document.querySelector('iframe[name="newsletter-hidden-frame"]');
+  if (iframe) {
+    iframe.addEventListener('load', function () {
+      if (!submitted) return;
+      form.style.display = 'none';
+      document.getElementById('newsletter-success').style.display = 'block';
     });
+  }
+  form.addEventListener('submit', function () {
+    submitted = true;
   });
 })();
 </script>
