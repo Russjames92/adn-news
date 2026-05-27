@@ -141,6 +141,12 @@ function articleImg(a, size) {
   return `<div class="${a.img_class}" style="width:100%;height:${h};display:flex;align-items:center;justify-content:center;">${ic}</div>`;
 }
 
+// ── SAFE TEXT HELPER ────────────────────────────────────────────────────────
+// Prevents $ signs and backticks in article text from breaking template literals
+function safe(str) {
+  return (str || '').replace(/`/g, '\u0060').replace(/\$/g, '&#36;');
+}
+
 // ── ARTICLE PAGE RENDERER ────────────────────────────────────────────────────
 function renderArticlePage(articles) {
   const params = new URLSearchParams(window.location.search);
@@ -152,7 +158,7 @@ function renderArticlePage(articles) {
     return;
   }
   document.title = a.headline + ' — ADN News';
-  const bodyHtml = a.body.map(p => `<p>${p}</p>`).join('');
+  const bodyHtml = a.body.map(p => `<p>${safe(p)}</p>`).join('');
   // Always use the permanent public site URL for share links so Facebook/Twitter get a valid URL.
   const SITE_BASE = 'https://www.adn-news.net';
   const rawUrl = SITE_BASE + '/article.html?slug=' + a.slug;
@@ -182,24 +188,24 @@ function renderArticlePage(articles) {
   document.getElementById('article-root').innerHTML = `
     <div class="article-hero-wrap">${articleImg(a, 'hero')}</div>
     <div class="article-wrap">
-      <span class="category-badge ${badgeClass(a.category)}" style="margin-bottom:var(--space-4);display:inline-flex;">${a.category_label}</span>
-      <h1 class="article-page-headline">${a.headline}</h1>
-      <p class="article-page-deck">${a.deck}</p>
+      <span class="category-badge ${badgeClass(a.category)}" style="margin-bottom:var(--space-4);display:inline-flex;">${safe(a.category_label)}</span>
+      <h1 class="article-page-headline">${safe(a.headline)}</h1>
+      <p class="article-page-deck">${safe(a.deck)}</p>
       <div class="article-byline">
-        <span class="author">${a.author}</span>
-        <span class="divider">·</span><span>${a.date_label}</span>
-        <span class="divider">·</span><span>${a.read_time}</span>
+        <span class="author">${safe(a.author)}</span>
+        <span class="divider">·</span><span>${safe(a.date_label)}</span>
+        <span class="divider">·</span><span>${safe(a.read_time)}</span>
         <span class="satire-tag-inline">Satire <span class="sarcasm-tag">100%</span></span>
       </div>
       ${shareBar}
       <div class="article-body-text">
         ${bodyHtml}
         <div class="pull-quote-article">
-          "${a.pull_quote}"
-          <br><span style="font-size:var(--text-sm);font-style:normal;font-family:var(--font-sans);font-weight:600;color:var(--color-text-faint);">— ${a.pull_quote_attribution}</span>
+          "${safe(a.pull_quote)}"
+          <br><span style="font-size:var(--text-sm);font-style:normal;font-family:var(--font-sans);font-weight:600;color:var(--color-text-faint);">— ${safe(a.pull_quote_attribution)}</span>
         </div>
         <div class="postmill-note">
-          <strong>ADN Editorial Note:</strong> ${a.postmill_note}
+          <strong>ADN Editorial Note:</strong> ${safe(a.postmill_note)}
         </div>
         <p style="color:var(--color-text-faint);font-size:var(--text-sm);font-style:italic;margin-top:var(--space-8);border-top:1px solid var(--color-border);padding-top:var(--space-4);">
           This story is entirely fictional. All persons, events, and institutes named are satirical inventions. Offered in Christian love.
