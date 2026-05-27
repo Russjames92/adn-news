@@ -1,11 +1,11 @@
 {
-  "updated": "2026-05-27T06:00:00Z",
+  "updated": "2026-05-27T13:00:00Z",
   "items": [
-    { "label": "Breaking", "text": "Local man updates Rapture countdown clock for 47th consecutive year" },
-    { "label": "Update", "text": "Kingdom of God still growing, sources confirm" },
-    { "label": "Breaking", "text": "Prophecy conference postponed pending updated generation length estimates" },
-    { "label": "Developing", "text": "Third Temple gift shop opens; tableware arrives ahead of tabernacle" },
-    { "label": "Update", "text": "Blood moon visible from Tulsa; prophecy expert calls it 'the most significant since last month's'" },
-    { "label": "Breaking", "text": "Rapture Ready Index reaches new high; market analysts urge calm" }
+    {"label": "Breaking", "text": "Rapture countdown app issues emergency patch after realizing \"any moment\" has no timezone support"},
+    {"label": "Developing", "text": "Prophecy conference adds overflow seating as attendees arrive with color-coded charts and pre-signed house deeds"},
+    {"label": "Update", "text": "Antichrist watchlist trimmed to 17 candidates after one ruled out for being \"too polite in interviews\""},
+    {"label": "Report", "text": "This-generation calculator recalibrated again when study Bible footnote declares Psalm 90 \"contextual\""},
+    {"label": "Watch", "text": "Silent Rapture drill scheduled for Sunday; organizers confirm \"no alarms, by design\""},
+    {"label": "Developing", "text": "Third Temple project management board goes live; first milestone listed as \"find red heifer, preferably local\""}
   ]
 }
