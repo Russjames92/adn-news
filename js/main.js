@@ -181,6 +181,63 @@ function renderArticlePage(articles) {
     return;
   }
   document.title = a.headline + ' — ADN News';
+
+  // --- SEO: Dynamic meta, Open Graph, Twitter Card, Article Schema ---
+  const SITE_BASE_SEO = 'https://www.adn-news.net';
+  const articlePageUrl = SITE_BASE_SEO + '/article.html?slug=' + a.slug;
+  const articleImg_url = a.img_url ? (SITE_BASE_SEO + '/' + a.img_url) : (SITE_BASE_SEO + '/images/logo.png');
+  const descText = a.deck || 'Eschatology reporting for the discerning believer.';
+
+  // Meta description
+  const metaDesc = document.getElementById('meta-description');
+  if (metaDesc) metaDesc.setAttribute('content', descText);
+
+  // Open Graph
+  const ogTitle = document.getElementById('og-title');
+  const ogDesc  = document.getElementById('og-description');
+  const ogUrl   = document.getElementById('og-url');
+  const ogImg   = document.getElementById('og-image');
+  if (ogTitle) ogTitle.setAttribute('content', a.headline + ' — ADN News');
+  if (ogDesc)  ogDesc.setAttribute('content', descText);
+  if (ogUrl)   ogUrl.setAttribute('content', articlePageUrl);
+  if (ogImg)   ogImg.setAttribute('content', articleImg_url);
+
+  // Twitter Card
+  const twTitle = document.getElementById('tw-title');
+  const twDesc  = document.getElementById('tw-description');
+  const twImg   = document.getElementById('tw-image');
+  if (twTitle) twTitle.setAttribute('content', a.headline + ' — ADN News');
+  if (twDesc)  twDesc.setAttribute('content', descText);
+  if (twImg)   twImg.setAttribute('content', articleImg_url);
+
+  // Article Schema (JSON-LD)
+  const existingSchema = document.getElementById('article-schema');
+  if (existingSchema) existingSchema.remove();
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': a.headline,
+    'description': descText,
+    'datePublished': a.date,
+    'dateModified': a.date,
+    'author': { '@type': 'Person', 'name': a.author },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'ADN News',
+      'url': SITE_BASE_SEO,
+      'logo': { '@type': 'ImageObject', 'url': SITE_BASE_SEO + '/images/logo.png' }
+    },
+    'image': articleImg_url,
+    'url': articlePageUrl,
+    'mainEntityOfPage': { '@type': 'WebPage', '@id': articlePageUrl }
+  };
+  const schemaTag = document.createElement('script');
+  schemaTag.id = 'article-schema';
+  schemaTag.type = 'application/ld+json';
+  schemaTag.textContent = JSON.stringify(schema);
+  document.head.appendChild(schemaTag);
+  // --- End SEO ---
+
   const bodyHtml = a.body.map(p => `<p>${safe(p)}</p>`).join('');
   // Always use the permanent public site URL for share links so Facebook/Twitter get a valid URL.
   const SITE_BASE = 'https://www.adn-news.net';
