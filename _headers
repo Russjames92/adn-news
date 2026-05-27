@@ -1,0 +1,22 @@
+# Cloudflare Pages _headers file
+# Cache static assets aggressively, HTML files briefly
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=86400
+
+/js/*
+  Cache-Control: public, max-age=86400
+
+/articles.json
+  Cache-Control: public, max-age=60
+
+/ticker.json
+  Cache-Control: public, max-age=60
+
+/*.html
+  Cache-Control: public, max-age=300
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
