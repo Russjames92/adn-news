@@ -31,7 +31,7 @@
     @media (max-width: 640px) { .article-list-item { grid-template-columns: 1fr; } .ali-image { display: none; } }
   </style>
 </head>
-<body>
+<body data-page="breaking">
 <div class="satire-watermark">Satire</div>
 
 <div class="top-bar" role="banner" aria-hidden="true">
@@ -84,59 +84,7 @@
   </div>
 
   <div class="page-wrap">
-    <div class="article-list">
-
-      <div class="article-list-item">
-        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div>
-        <div class="ali-content">
-          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
-          <h2 class="ali-headline"><a href="article.html">Local Prophecy Conference Postponed After Host Realizes 'This Generation' Has Now Passed Three Times</a></h2>
-          <p class="ali-deck">Organizers announce "brief indefinite delay" while recalibrating generational math for the third time.</p>
-          <span class="ali-meta">Chester T. Rapture · May 26, 2026 · 4 min read</span>
-        </div>
-      </div>
-
-      <div class="article-list-item">
-        <div class="ali-image img-prophecy"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div></div>
-        <div class="ali-content">
-          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
-          <h2 class="ali-headline"><a href="article.html">Man Sells House to Prepare for Rapture — Again</a></h2>
-          <p class="ali-deck">Gary Whitfield of Cedar Rapids has now liquidated his assets ahead of the Rapture on four separate occasions, maintaining an impressive record of zero for four.</p>
-          <span class="ali-meta">Donna Prebulation · May 25, 2026 · 3 min read</span>
-        </div>
-      </div>
-
-      <div class="article-list-item">
-        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div></div>
-        <div class="ali-content">
-          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
-          <h2 class="ali-headline"><a href="article.html">Church Cancels Capital Campaign — "No Point If We're Leaving Soon"</a></h2>
-          <p class="ali-deck">Elders of First Baptist End Times Fellowship vote unanimously to table the building fund for the sixth consecutive year, citing imminent departure.</p>
-          <span class="ali-meta">Chester T. Rapture · May 24, 2026 · 2 min read</span>
-        </div>
-      </div>
-
-      <div class="article-list-item">
-        <div class="ali-image img-kingdom"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div>
-        <div class="ali-content">
-          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Kingdom Report</span>
-          <h2 class="ali-headline"><a href="article.html">Kingdom of God Reports Record Expansion for 2,000th Consecutive Year</a></h2>
-          <p class="ali-deck">Annual growth report goes largely unnoticed by prophecy media due to absence of any associated catastrophe.</p>
-          <span class="ali-meta">Priscilla Millstone · May 23, 2026 · 3 min read</span>
-        </div>
-      </div>
-
-      <div class="article-list-item">
-        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div></div>
-        <div class="ali-content">
-          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
-          <h2 class="ali-headline"><a href="article.html">New Christian Movie About the Rapture Features Slightly Better Special Effects Than Last 47</a></h2>
-          <p class="ali-deck">Hollywood insiders note that the ascending believers now look "mostly like real people" rather than "someone's screensaver from 2003."</p>
-          <span class="ali-meta">Chester T. Rapture · May 22, 2026 · 2 min read</span>
-        </div>
-      </div>
-
-    </div>
+    <div id="category-article-list" class="article-list"><!-- dynamic --></div>
   </div>
 </main>
 
