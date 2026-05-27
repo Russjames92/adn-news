@@ -491,6 +491,12 @@
   margin-top: auto;
 }
 
+/* Ensure images never overflow their containers on mobile */
+@media (max-width: 480px) {
+  .story-card-image { aspect-ratio: 16/9; }
+  .img-attribution { font-size: 9px; padding: 2px 5px; }
+}
+
 /* Compact list-style story card (for sidebar) */
 .story-list-item {
   display: flex;
@@ -672,6 +678,12 @@
   font-weight: 900;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .prophecy-meter-label { font-size: 0.65rem; }
+  .prophecy-meter-reading { font-size: var(--text-lg); }
+  .meter-bar-wrap { min-width: 80px; }
 }
 
 .prophecy-meter-caption {
@@ -897,25 +909,43 @@
   .opinion-cards { grid-template-columns: 1fr 1fr; }
   .israel-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
+  .sidebar { flex-direction: row; flex-wrap: wrap; gap: var(--space-6); }
+  .sidebar-widget, .disclaimer-box, .promo-unit { flex: 1; min-width: 260px; }
+}
+
+@media (max-width: 768px) {
+  .sidebar { flex-direction: column; }
+  .sidebar-widget, .disclaimer-box, .promo-unit { min-width: unset; width: 100%; }
 }
 
 @media (max-width: 768px) {
   .hero-story { grid-template-columns: 1fr; }
-  .hero-story-image { min-height: 260px; }
-  .hero-story-content { border-left: none; border-top: 2px solid var(--color-text); padding: var(--space-6); }
+  .hero-story-image { min-height: 240px; }
+  .hero-story-content { border-left: none; border-top: 2px solid var(--color-text); padding: var(--space-5) var(--space-4); }
   .content-grid { grid-template-columns: 1fr; }
   .opinion-cards { grid-template-columns: 1fr; }
   .israel-grid { grid-template-columns: 1fr; }
-  .prophecy-meter-inner { flex-wrap: wrap; gap: var(--space-4); }
+  .prophecy-meter { padding: var(--space-4) var(--space-4); }
+  .prophecy-meter-inner { flex-wrap: wrap; gap: var(--space-3); padding: 0; }
   .prophecy-meter-caption { display: none; }
-  .footer-top { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
   .masthead-date-line { flex-direction: column; gap: var(--space-2); text-align: center; }
+  .opinion-strip-inner { padding: 0 var(--space-4); }
+  .nav-link { padding: var(--space-3) var(--space-4); font-size: 0.75rem; }
+}
+
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
   .site-title { font-size: clamp(2rem, 8vw, 3.5rem); }
-  .primary-nav-inner { padding: 0 var(--space-4); }
-  .page-wrap { padding: var(--space-4) var(--space-4); }
+  .primary-nav-inner { padding: 0 var(--space-2); }
+  .page-wrap { padding: var(--space-4) var(--space-3); }
+  .hero-story-image { min-height: 200px; }
+  .hero-story-content { padding: var(--space-4) var(--space-3); }
+  .hero-headline { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+  .nav-link { padding: var(--space-3) var(--space-3); font-size: 0.7rem; letter-spacing: 0.04em; }
 }
 
 /* ============================================================

@@ -101,7 +101,11 @@
     <h2>Submit a Tip or Story Idea</h2>
     <p>Have you spotted a prophecy conference, blood moon watch party, or Antichrist identification event that deserves coverage? We want to hear about it. Our editorial team reviews all submissions and will reach out if your tip leads to a story.</p>
 
-    <form class="contact-form" onsubmit="handleContact(event)">
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="829221c3-53d5-4f14-9e4f-9f8b8d41c41e" />
+      <input type="hidden" name="subject" value="ADN News Contact Form Submission" />
+      <input type="hidden" name="redirect" value="https://www.adn-news.net/contact.html?sent=1" />
+      <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
       <div>
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" placeholder="Chester T. Rapture" required />
@@ -111,13 +115,13 @@
         <input type="email" id="email" name="email" placeholder="your@email.com" required />
       </div>
       <div>
-        <label for="subject">Subject</label>
-        <select id="subject" name="subject">
-          <option value="tip">Story Tip</option>
-          <option value="theology">Theological Question</option>
-          <option value="testimony">My Dispensationalism Story</option>
-          <option value="correction">Correction (We Take These Seriously)</option>
-          <option value="general">General Inquiry</option>
+        <label for="contact_subject">Subject</label>
+        <select id="contact_subject" name="contact_subject">
+          <option value="Story Tip">Story Tip</option>
+          <option value="Theological Question">Theological Question</option>
+          <option value="My Dispensationalism Story">My Dispensationalism Story</option>
+          <option value="Correction (We Take These Seriously)">Correction (We Take These Seriously)</option>
+          <option value="General Inquiry">General Inquiry</option>
         </select>
       </div>
       <div>
@@ -144,9 +148,9 @@
   </div>
 </main>
 <script>
-function handleContact(e) {
-  e.preventDefault();
-  document.querySelector('.contact-form').style.display = 'none';
+// Show success message if redirected back with ?sent=1
+if (new URLSearchParams(window.location.search).get('sent') === '1') {
+  document.getElementById('contact-form').style.display = 'none';
   document.getElementById('contact-success').style.display = 'block';
 }
 </script>

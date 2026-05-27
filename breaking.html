@@ -31,7 +31,8 @@
     .img-breaking { background: linear-gradient(135deg, #2a1a00 0%, #6b4200 40%, #3a2000 100%); }
     .img-prophecy { background: linear-gradient(135deg, #5c1a1a 0%, #8b2020 40%, #3a0a0a 100%); }
     .img-kingdom { background: linear-gradient(135deg, #0a2a0a 0%, #1a5c1a 40%, #0a3a0a 100%); }
-    @media (max-width: 640px) { .article-list-item { grid-template-columns: 1fr; } .ali-image { display: none; } }
+    @media (max-width: 640px) { .article-list-item { grid-template-columns: 100px 1fr; gap: var(--space-3); } .ali-image { height: 100px; min-width: 100px; } .ali-deck { display: none; } }
+    @media (max-width: 380px) { .article-list-item { grid-template-columns: 1fr; } .ali-image { display: none; } }
   </style>
 </head>
 <body data-page="breaking">

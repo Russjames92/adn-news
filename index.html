@@ -25,7 +25,7 @@
     .newsletter-text h3 { font-family:var(--font-display);font-size:var(--text-lg);font-weight:800;margin-bottom:var(--space-2); }
     .newsletter-text p { font-size:var(--text-sm);color:var(--color-text-muted); }
     .newsletter-form { display:flex;gap:var(--space-2);flex-wrap:wrap; }
-    .newsletter-input { border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);padding:var(--space-3) var(--space-4);font-family:var(--font-sans);font-size:var(--text-sm);min-width:220px;border-radius:var(--radius-sm); }
+    .newsletter-input { border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);padding:var(--space-3) var(--space-4);font-family:var(--font-sans);font-size:var(--text-sm);min-width:min(220px,100%);border-radius:var(--radius-sm);flex:1; }
     .newsletter-btn { background:var(--color-primary);color:#fff;padding:var(--space-3) var(--space-6);font-family:var(--font-sans);font-size:var(--text-sm);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius-sm);cursor:pointer;border:none;transition:background var(--transition-interactive); }
     .newsletter-btn:hover { background:var(--color-primary-hover); }
     .pull-quote { border-left:4px solid var(--color-primary);padding:var(--space-4) var(--space-6);margin:var(--space-8) 0;font-family:var(--font-display);font-size:var(--text-lg);font-style:italic;color:var(--color-text-muted);line-height:1.5; }
@@ -35,7 +35,20 @@
     .stat-label { font-family:var(--font-sans);font-size:var(--text-xs);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted); }
     .avatar-initials { width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:1.1rem;color:#fff;flex-shrink:0;border:2px solid var(--color-border); }
     @media(max-width:768px){.stat-row{grid-template-columns:1fr 1fr;}}
-    @media(max-width:480px){.stat-row{grid-template-columns:1fr;}}
+    @media(max-width:480px){.stat-row{grid-template-columns:1fr 1fr;} .stat-number{font-size:clamp(1.5rem,7vw,2.5rem);}}
+    @media(max-width:360px){.stat-row{grid-template-columns:1fr;}}
+    /* Newsletter mobile */
+    @media(max-width:600px){
+      .newsletter-inner{flex-direction:column;gap:var(--space-4);}
+      .newsletter-form{flex-direction:column;width:100%;}
+      .newsletter-input{min-width:unset;width:100%;}
+      .newsletter-btn{width:100%;justify-content:center;text-align:center;}
+    }
+    /* Sidebar stacks below content on mobile */
+    @media(max-width:768px){
+      .content-grid-2col .sidebar{order:2;}
+      .content-grid-2col > *:first-child{order:1;}
+    }
     /* skeleton loaders */
     .skeleton { background: linear-gradient(90deg, var(--color-surface-offset) 25%, var(--color-surface-dynamic) 50%, var(--color-surface-offset) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-sm); }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
@@ -182,10 +195,12 @@
         <h3>Don't Miss the Rapture — Subscribe</h3>
         <p>Get the latest prophetic developments delivered to your inbox. We promise to write the subject line "THIS IS IT" at least once a week.</p>
       </div>
-      <form class="newsletter-form" onsubmit="return false;">
-        <input class="newsletter-input" type="email" placeholder="your@email.com" aria-label="Email address" />
-        <button class="newsletter-btn" type="submit">Subscribe (Just In Case)</button>
+      <form class="newsletter-form" id="newsletter-form">
+        <input class="newsletter-input" type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required />
+        <button class="newsletter-btn" type="submit" id="newsletter-btn">Subscribe (Just In Case)</button>
       </form>
+      <div id="newsletter-success" style="display:none; font-family:var(--font-sans); font-size:var(--text-sm); color:var(--color-text-muted); padding:var(--space-3) 0;">You're subscribed. We'll write the subject line "THIS IS IT" at least once a week.</div>
+      <div id="newsletter-error" style="display:none; font-family:var(--font-sans); font-size:var(--text-sm); color:#9b1c1c; padding:var(--space-3) 0;">Something went wrong. Try again shortly.</div>
     </div>
   </div>
 
@@ -244,5 +259,41 @@
   </div>
 </footer>
 <script src="js/main.js"></script>
+<script>
+(function () {
+  // Google Apps Script web app URL — replace APPS_SCRIPT_URL_HERE after deploying the script
+  var APPS_SCRIPT_URL = 'APPS_SCRIPT_URL_HERE';
+
+  var form = document.getElementById('newsletter-form');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('newsletter-email').value.trim();
+    if (!email) return;
+    var btn = document.getElementById('newsletter-btn');
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ email: email })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.result === 'success') {
+        form.style.display = 'none';
+        document.getElementById('newsletter-success').style.display = 'block';
+      } else {
+        throw new Error('error');
+      }
+    })
+    .catch(function () {
+      document.getElementById('newsletter-error').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe (Just In Case)';
+    });
+  });
+})();
+</script>
 </body>
 </html>

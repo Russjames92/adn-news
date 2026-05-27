@@ -192,6 +192,21 @@ a:hover { color: var(--color-primary); }
 }
 
 button { cursor: pointer; background: none; border: none; }
+
+/* Touch target minimum size for interactive elements on mobile */
+@media (max-width: 768px) {
+  /* Theme toggle button needs tap area */
+  .theme-toggle {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Nav links */
+  .nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
 table { border-collapse: collapse; width: 100%; }
 
 a, button, [role='button'], [role='link'], input, textarea, select {
