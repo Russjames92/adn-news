@@ -53,6 +53,22 @@ const ARTICLES_URL = 'articles.json';
   });
 })();
 
+// ── DYNAMIC TICKER ─────────────────────────────────────────────────────────
+(function () {
+  const tickerEl = document.querySelector('.ticker-items');
+  if (!tickerEl) return;
+  fetch('ticker.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      if (!data.items || !data.items.length) return;
+      const html = data.items.map(item =>
+        `<span><span class="ticker-label">${item.label}</span> ${item.text}</span><span>&#8195;&bull;&#8195;</span>`
+      ).join('');
+      tickerEl.innerHTML = html;
+    })
+    .catch(() => { /* silently keep hardcoded fallback */ });
+})();
+
 // ── PROPHECY METER ───────────────────────────────────────────────────────────
 (function () {
   const fill = document.querySelector('.meter-bar-fill');
