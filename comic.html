@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Comic — ADN News</title>
+  <meta name="description" content="The ADN News daily single-panel comic. A new one every morning. Miss it and it's gone." id="meta-description" />
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="ADN News" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Daily Comic — ADN News" />
+  <meta property="og:description" content="A new single-panel comic every morning. Miss it and it's gone." />
+  <meta property="og:url" content="https://www.adn-news.net/comic.html" />
+  <meta property="og:image" content="https://www.adn-news.net/images/logo.png" id="og-image" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daily Comic — ADN News" />
+  <meta name="twitter:description" content="A new single-panel comic every morning. Miss it and it's gone." />
+  <meta name="twitter:image" content="https://www.adn-news.net/images/logo.png" id="tw-image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+  <link rel="stylesheet" href="css/base.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+  <style>
+    .comic-page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: var(--space-10) var(--space-6) var(--space-16);
+    }
+    .comic-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
+    }
+    .comic-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+    .comic-date {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-8);
+    }
+    .comic-panel-wrap {
+      width: 100%;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--color-surface);
+      margin-bottom: var(--space-5);
+    }
+    .comic-panel-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .comic-panel-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface-alt, #f5f0e8);
+      color: var(--color-text-faint);
+      font-family: var(--font-serif);
+      font-size: var(--text-lg);
+      font-style: italic;
+    }
+    .comic-caption {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-style: italic;
+      color: var(--color-text);
+      text-align: center;
+      line-height: 1.5;
+      padding: var(--space-2) var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .comic-scarcity-note {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-5);
+      margin-top: var(--space-2);
+    }
+    .comic-scarcity-note strong {
+      color: var(--color-text);
+    }
+    .comic-loading {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface-alt, #f5f0e8);
+      color: var(--color-text-faint);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+    }
+    @media (max-width: 640px) {
+      .comic-page-wrap { padding: var(--space-6) var(--space-4) var(--space-12); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticker-bar" id="ticker-bar" aria-label="Breaking news ticker">
+    <span class="ticker-label">Ticker</span>
+    <div class="ticker-track" id="ticker-track"></div>
+  </div>
+
+  <header class="site-header" role="banner">
+    <div class="masthead-inner">
+      <div class="masthead-date-line">
+        <span class="edition-label">Eschatology Edition</span>
+        <a href="index.html" class="masthead-logo-link" aria-label="ADN News — Home">
+          <img src="images/logo.png" alt="ADN News" class="site-logo-img" />
+        </a>
+        <div class="masthead-header-controls">
+          <span class="masthead-live-date"></span>
+          <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="masthead-tagline-row">
+        <p class="site-subtitle">Eschatology Reporting for the Discerning Believer</p>
+        <p class="site-tagline">"Any Day Now" — est. 1948 (give or take a generation)</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="primary-nav" aria-label="Main navigation">
+    <div class="primary-nav-inner">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="breaking.html" class="nav-link nav-highlight">Breaking News</a>
+      <a href="prophecy-watch.html" class="nav-link">Prophecy Watch</a>
+      <a href="israel.html" class="nav-link">What's Happening in Israel</a>
+      <a href="#opinion" class="nav-link" data-smooth-scroll>Opinion</a>
+      <a href="#about" class="nav-link" data-smooth-scroll>About ADN</a>
+      <a href="contact.html" class="nav-link">Submit a Tip</a>
+    </div>
+  </nav>
+
+  <main id="comic-root">
+    <div class="comic-page-wrap">
+      <div class="comic-loading">Loading today's comic…</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-site-name">ADN News</div><p>Any Day Now — est. 1948 (give or take a generation). Satirical eschatology reporting for the postmillennial age.</p></div>
+        <div class="footer-col"><h4>Sections</h4><ul><li><a href="breaking.html">Breaking News</a></li><li><a href="prophecy-watch.html">Prophecy Watch</a></li><li><a href="israel.html">What's Happening in Israel</a></li><li><a href="index.html#opinion">Opinion</a></li></ul></div>
+        <div class="footer-col"><h4>About</h4><ul><li><a href="index.html#about">About ADN</a></li><li><a href="index.html#submit">Submit a Tip</a></li><li><a href="our-eschatology.html">Our Eschatology</a></li><li><a href="recommended-reading.html">Recommended Reading</a></li></ul></div>
+        <div class="footer-col"><h4>Resources</h4><ul><li><a href="postmill-primer.html">Postmill Primer</a></li><li><a href="preterist-101.html">Preterist 101</a></li><li><a href="why-we-left-dispytown.html">Why We Left Dispytown</a></li><li><a href="contact.html">Contact</a></li><li><a href="comic.html">Daily Comic</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">ADN News is entirely satirical. All headlines, stories, and persons are fictional. &copy; 2026 ADN News &mdash; Any Day Now.</p>
+        <p>Satire &middot; Faith &middot; Kingdom</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="satire-watermark">Satire</div>
+
+<script src="js/main.js?v=8"></script>
+<script>
+(function() {
+  function renderComic(comic) {
+    const root = document.getElementById('comic-root');
+    const imgSrc = comic.image || '';
+    const caption = comic.caption || '';
+    const dateLabel = comic.date_label || '';
+    const alt = comic.alt || 'ADN News Daily Comic';
+
+    // Update OG image for sharing
+    const ogImg = document.getElementById('og-image');
+    const twImg = document.getElementById('tw-image');
+    if (ogImg && imgSrc) ogImg.setAttribute('content', 'https://www.adn-news.net/' + imgSrc);
+    if (twImg && imgSrc) twImg.setAttribute('content', 'https://www.adn-news.net/' + imgSrc);
+
+    root.innerHTML = `
+      <div class="comic-page-wrap">
+        <div class="comic-eyebrow">Daily Comic</div>
+        <h1 class="comic-title">Today's Panel</h1>
+        <p class="comic-date">${dateLabel}</p>
+        <div class="comic-panel-wrap">
+          ${imgSrc
+            ? `<img src="${imgSrc}" alt="${alt}" loading="eager" />`
+            : `<div class="comic-panel-placeholder">Today's comic is on its way.</div>`
+          }
+        </div>
+        ${caption ? `<p class="comic-caption">"${caption}"</p>` : ''}
+        <div class="comic-scarcity-note">
+          <strong>No archive.</strong> A new comic drops every morning at 5 AM. Miss it and it's gone for good.
+        </div>
+      </div>
+    `;
+  }
+
+  fetch('comic.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(comic) { renderComic(comic); })
+    .catch(function() {
+      document.getElementById('comic-root').innerHTML =
+        '<div class="comic-page-wrap"><p style="text-align:center;padding:4rem 2rem;color:var(--color-text-muted);font-family:var(--font-serif);font-style:italic;">Today\'s comic is coming. Check back at 5 AM.</p></div>';
+    });
+})();
+</script>
+</body>
+</html>
