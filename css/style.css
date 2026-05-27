@@ -42,12 +42,7 @@
 .ticker-items {
   display: flex;
   gap: var(--space-8);
-  animation: ticker 30s linear infinite;
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  /* animation driven by JS rAF for seamless looping */
 }
 
 /* ============================================================

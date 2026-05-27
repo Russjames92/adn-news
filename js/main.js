@@ -61,12 +61,30 @@ const ARTICLES_URL = 'articles.json';
     .then(r => r.json())
     .then(data => {
       if (!data.items || !data.items.length) return;
-      const html = data.items.map(item =>
-        `<span><span class="ticker-label">${item.label}</span> ${item.text}</span><span>&#8195;&bull;&#8195;</span>`
+      const oneSet = data.items.map(item =>
+        '<span class="ticker-item"><span class="ticker-label">' + item.label + '</span> ' + item.text + '</span><span class="ticker-sep" aria-hidden="true">&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>'
       ).join('');
-      tickerEl.innerHTML = html;
+      // Triple the content so the loop is always seamless
+      tickerEl.innerHTML = oneSet + oneSet + oneSet;
+      // Kill CSS animation — drive with rAF for buttery smoothness
+      tickerEl.style.animation = 'none';
+      tickerEl.style.willChange = 'transform';
+      var speed = 0.45; // px per frame at 60fps
+      var pos = 0;
+      var oneWidth = 0;
+      function measure() {
+        oneWidth = tickerEl.scrollWidth / 3;
+        if (oneWidth > 0) requestAnimationFrame(tick);
+      }
+      function tick() {
+        pos += speed;
+        if (pos >= oneWidth) pos -= oneWidth;
+        tickerEl.style.transform = 'translateX(-' + pos + 'px)';
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(measure);
     })
-    .catch(() => { /* silently keep hardcoded fallback */ });
+    .catch(function() {});
 })();
 
 // ── PROPHECY METER ───────────────────────────────────────────────────────────
@@ -235,8 +253,8 @@ function renderArticlePage(articles) {
 
 // ── HOMEPAGE RENDERER ────────────────────────────────────────────────────────
 function renderHomepage(articles) {
-  // HERO — most recent featured, or just most recent
-  const hero = articles.find(a => a.featured) || articles[0];
+  // HERO — always use the most recent article (index 0)
+  const hero = articles[0];
   const heroEl = document.getElementById('hero-story');
   if (heroEl && hero) {
     heroEl.innerHTML = `
