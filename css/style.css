@@ -119,6 +119,22 @@
   text-align: center;
 }
 
+/* Image logo */
+.site-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+/* Dark mode: logo works naturally — red box pops on dark bg, brighten NEWS text slightly */
+[data-theme='dark'] .site-logo-img {
+  filter: brightness(1.15) contrast(0.95);
+}
+
+@media (max-width: 480px) {
+  .site-logo-img { height: 40px; }
+}
+
 .site-subtitle {
   font-family: var(--font-sans);
   font-size: var(--text-xs);
