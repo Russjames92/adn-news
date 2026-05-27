@@ -91,9 +91,9 @@
     <a href="breaking.html" class="nav-link nav-highlight">Breaking News</a>
     <a href="prophecy-watch.html" class="nav-link">Prophecy Watch</a>
     <a href="israel.html" class="nav-link">What's Happening in Israel</a>
-    <a href="#opinion" class="nav-link">Opinion</a>
-    <a href="#about" class="nav-link">About ADN</a>
-    <a href="#submit" class="nav-link">Submit a Tip</a>
+    <a href="#opinion" class="nav-link" data-smooth-scroll>Opinion</a>
+    <a href="#about" class="nav-link" data-smooth-scroll>About ADN</a>
+    <a href="contact.html" class="nav-link">Submit a Tip</a>
   </div>
 </nav>
 
@@ -189,7 +189,7 @@
   </div>
 
   <!-- OPINION -->
-  <section id="opinion">
+  <section id="opinion" style="scroll-margin-top: 16px;">
     <div class="opinion-strip">
       <div class="opinion-strip-inner">
         <div class="section-header" style="border-color:var(--color-border);">
@@ -201,7 +201,7 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about">
+  <section id="about" style="scroll-margin-top: 16px;">
     <div class="page-wrap" style="padding-bottom:0;">
       <div class="section-header"><div class="section-accent"></div><h2>About ADN News</h2></div>
       <div class="content-grid-2col fade-in" style="margin-bottom:var(--space-12);">
@@ -261,6 +261,21 @@
     submitted = true;
   });
 })();
+</script>
+<script>
+// Smooth scroll for anchor nav links — waits for dynamic content to settle
+document.querySelectorAll('[data-smooth-scroll]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+    var target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    setTimeout(function() {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  });
+});
 </script>
 </body>
 </html>
