@@ -132,7 +132,7 @@
 
 /* Image logo */
 .site-logo-img {
-  height: 52px;
+  height: 160px;
   width: auto;
   display: block;
 }
@@ -155,10 +155,10 @@
 }
 
 @media (max-width: 768px) {
-  .site-logo-img { height: 40px; }
+  .site-logo-img { height: 120px; }
 }
 @media (max-width: 480px) {
-  .site-logo-img { height: 34px; }
+  .site-logo-img { height: 90px; }
 }
 
 .site-subtitle {
