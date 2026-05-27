@@ -128,7 +128,7 @@ function articleImg(a, size) {
     // For other sizes: use fixed-height wrapper as before
     if (size === 'hero') {
       return `<div class="article-photo-wrap article-photo-wrap--hero" style="position:absolute;inset:0;overflow:hidden;background:#111;">
-        <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+        <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="eager" />
         ${attr}
       </div>`;
     }
@@ -153,18 +153,45 @@ function renderArticlePage(articles) {
   }
   document.title = a.headline + ' — ADN News';
   const bodyHtml = a.body.map(p => `<p>${p}</p>`).join('');
+  // Always use the permanent public site URL for share links so Facebook/Twitter get a valid URL.
+  const SITE_BASE = 'https://www.adn-news.net';
+  const rawUrl = SITE_BASE + '/article.html?slug=' + a.slug;
+  const articleUrl = encodeURIComponent(rawUrl);
+  const articleTitle = encodeURIComponent(a.headline);
+  const shareBar = `
+    <div class="share-bar">
+      <span class="share-label">Share</span>
+      <a class="share-btn share-btn--facebook" href="https://www.facebook.com/sharer/sharer.php?u=${articleUrl}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a class="share-btn share-btn--twitter" href="https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}" target="_blank" rel="noopener" aria-label="Share on X (Twitter)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <a class="share-btn share-btn--email" href="mailto:?subject=${articleTitle}&body=Check%20out%20this%20story%20from%20ADN%20News%3A%20${articleUrl}" aria-label="Share via Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Email
+      </a>
+      <button class="share-btn share-btn--copy" onclick="(function(btn){navigator.clipboard.writeText('${rawUrl}' || window.location.href).then(function(){var orig=btn.innerHTML;btn.innerHTML='<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><polyline points=\'20 6 9 17 4 12\'/></svg> Copied!';btn.classList.add(\'share-btn--copied\');setTimeout(function(){btn.innerHTML=orig;btn.classList.remove(\'share-btn--copied\');},2000);})})(this)" aria-label="Copy link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Link
+      </button>
+    </div>
+  `;
   document.getElementById('article-root').innerHTML = `
-    <div style="margin-bottom:var(--space-10);">${articleImg(a, 'hero')}</div>
+    <div class="article-hero-wrap">${articleImg(a, 'hero')}</div>
     <div class="article-wrap">
       <span class="category-badge ${badgeClass(a.category)}" style="margin-bottom:var(--space-4);display:inline-flex;">${a.category_label}</span>
-      <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;line-height:1.1;margin-bottom:var(--space-4);">${a.headline}</h1>
-      <p style="font-size:var(--text-lg);color:var(--color-text-muted);font-style:italic;line-height:1.55;margin-bottom:var(--space-4);max-width:60ch;">${a.deck}</p>
+      <h1 class="article-page-headline">${a.headline}</h1>
+      <p class="article-page-deck">${a.deck}</p>
       <div class="article-byline">
         <span class="author">${a.author}</span>
-        <span>·</span><span>${a.date_label}</span>
-        <span>·</span><span>${a.read_time}</span>
-        <span style="margin-left:auto;font-style:italic;font-size:var(--text-xs);">Satire <span class="sarcasm-tag">100%</span></span>
+        <span class="divider">·</span><span>${a.date_label}</span>
+        <span class="divider">·</span><span>${a.read_time}</span>
+        <span class="satire-tag-inline">Satire <span class="sarcasm-tag">100%</span></span>
       </div>
+      ${shareBar}
       <div class="article-body-text">
         ${bodyHtml}
         <div class="pull-quote-article">
