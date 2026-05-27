@@ -101,6 +101,22 @@ function placeholderImg(cls, minH) {
   return `<div class="${cls}" style="width:100%;height:100%;min-height:${minH || 180}px;display:flex;align-items:center;justify-content:center;">${ic}</div>`;
 }
 
+// articleImg — renders real photo when img_url exists, otherwise SVG placeholder
+// size: 'hero' | 'card' | 'thumb' | 'list'
+function articleImg(a, size) {
+  const heights = { hero: '460px', card: '220px', thumb: '110px', list: '150px' };
+  const h = heights[size] || '220px';
+  if (a.img_url) {
+    const attr = a.img_attribution ? `<span class="img-attribution">${a.img_attribution}</span>` : '';
+    return `<div class="article-photo-wrap" style="position:relative;width:100%;height:${h};overflow:hidden;background:#111;">
+      <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+      ${attr}
+    </div>`;
+  }
+  const ic = svgIcons[a.img_class] || svgIcons['img-hero'];
+  return `<div class="${a.img_class}" style="width:100%;height:${h};display:flex;align-items:center;justify-content:center;">${ic}</div>`;
+}
+
 // ── ARTICLE PAGE RENDERER ────────────────────────────────────────────────────
 function renderArticlePage(articles) {
   const params = new URLSearchParams(window.location.search);
@@ -114,9 +130,7 @@ function renderArticlePage(articles) {
   document.title = a.headline + ' — ADN News';
   const bodyHtml = a.body.map(p => `<p>${p}</p>`).join('');
   document.getElementById('article-root').innerHTML = `
-    <div class="${a.img_class}" style="width:100%;height:380px;display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-10);">
-      ${svgIcons[a.img_class] || svgIcons['img-hero']}
-    </div>
+    <div style="margin-bottom:var(--space-10);">${articleImg(a, 'hero')}</div>
     <div class="article-wrap">
       <span class="category-badge ${badgeClass(a.category)}" style="margin-bottom:var(--space-4);display:inline-flex;">${a.category_label}</span>
       <h1 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;line-height:1.1;margin-bottom:var(--space-4);">${a.headline}</h1>
@@ -145,7 +159,7 @@ function renderArticlePage(articles) {
         <div class="related-grid">
           ${articles.filter(x => x.slug !== slug).slice(0, 3).map(r => `
             <div class="related-card">
-              <div class="${r.img_class}" style="height:100px;display:flex;align-items:center;justify-content:center;">${svgIcons[r.img_class] || ''}</div>
+              ${articleImg(r, 'thumb')}
               <span class="cat" style="font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-faint);">${r.category_label}</span>
               <h3 style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;line-height:1.3;transition:color var(--transition-interactive);">
                 <a href="article.html?slug=${r.slug}" style="transition:color var(--transition-interactive);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color=''">${r.headline}</a>
@@ -165,10 +179,8 @@ function renderHomepage(articles) {
   const heroEl = document.getElementById('hero-story');
   if (heroEl && hero) {
     heroEl.innerHTML = `
-      <div class="hero-story-image ${hero.img_class}">
-        <div style="width:100%;height:100%;min-height:440px;display:flex;align-items:center;justify-content:center;">
-          ${svgIcons[hero.img_class] || svgIcons['img-hero']}
-        </div>
+      <div class="hero-story-image">
+        ${articleImg(hero, 'hero')}
       </div>
       <div class="hero-story-content">
         <span class="category-badge ${badgeClass(hero.category)}">${hero.category_label}</span>
@@ -192,11 +204,7 @@ function renderHomepage(articles) {
   if (topGrid) {
     topGrid.innerHTML = topStories.map(a => `
       <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
-        <div class="story-card-image ${a.img_class}">
-          <div style="width:100%;height:100%;min-height:200px;display:flex;align-items:center;justify-content:center;">
-            ${svgIcons[a.img_class] || svgIcons['img-hero']}
-          </div>
-        </div>
+        <div class="story-card-image">${articleImg(a, 'card')}</div>
         <span class="category-badge ${badgeClass(a.category)}">${a.category_label}</span>
         <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
         <p class="story-card-deck">${a.deck}</p>
@@ -225,11 +233,7 @@ function renderHomepage(articles) {
     const pw = articles.filter(a => a.category === 'prophecy').slice(0, 3);
     pwGrid.innerHTML = pw.map(a => `
       <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
-        <div class="story-card-image ${a.img_class}">
-          <div style="width:100%;height:100%;min-height:200px;display:flex;align-items:center;justify-content:center;">
-            ${svgIcons[a.img_class] || svgIcons['img-hero']}
-          </div>
-        </div>
+        <div class="story-card-image">${articleImg(a, 'card')}</div>
         <span class="category-badge badge-prophecy">${a.category_label}</span>
         <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
         <p class="story-card-deck">${a.deck}</p>
@@ -272,11 +276,7 @@ function renderHomepage(articles) {
     const il = articles.filter(a => a.category === 'israel').slice(0, 3);
     israelGrid.innerHTML = il.map(a => `
       <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
-        <div class="story-card-image ${a.img_class}">
-          <div style="width:100%;height:100%;min-height:200px;display:flex;align-items:center;justify-content:center;">
-            ${svgIcons[a.img_class] || svgIcons['img-hero']}
-          </div>
-        </div>
+        <div class="story-card-image">${articleImg(a, 'card')}</div>
         <span class="category-badge badge-israel">${a.category_label}</span>
         <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
         <p class="story-card-deck">${a.deck}</p>
@@ -295,11 +295,7 @@ function renderCategoryPage(articles, catFilter) {
   const filtered = catFilter === 'all' ? articles : articles.filter(a => a.category === catFilter);
   listEl.innerHTML = filtered.map(a => `
     <div class="article-list-item" onclick="location.href='article.html?slug=${a.slug}'">
-      <div class="ali-image ${a.img_class}">
-        <div style="width:100%;height:140px;display:flex;align-items:center;justify-content:center;">
-          ${svgIcons[a.img_class] || svgIcons['img-hero']}
-        </div>
-      </div>
+      <div class="ali-image">${articleImg(a, 'list')}</div>
       <div class="ali-content">
         <span class="category-badge ${badgeClass(a.category)}" style="font-size:10px;padding:1px 6px;width:fit-content;">${a.category_label}</span>
         <h2 class="ali-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
