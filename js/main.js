@@ -108,6 +108,14 @@ function articleImg(a, size) {
   const h = heights[size] || '220px';
   if (a.img_url) {
     const attr = a.img_attribution ? `<span class="img-attribution">${a.img_attribution}</span>` : '';
+    // For hero size: let the CSS grid cell control height (position:absolute fill)
+    // For other sizes: use fixed-height wrapper as before
+    if (size === 'hero') {
+      return `<div class="article-photo-wrap article-photo-wrap--hero" style="position:absolute;inset:0;overflow:hidden;background:#111;">
+        <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+        ${attr}
+      </div>`;
+    }
     return `<div class="article-photo-wrap" style="position:relative;width:100%;height:${h};overflow:hidden;background:#111;">
       <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
       ${attr}
