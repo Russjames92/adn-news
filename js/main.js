@@ -318,8 +318,8 @@ function renderHomepage(articles) {
     `;
   }
 
-  // TOP STORIES — next 3 after the above-fold articles
-  const topStories = remaining.slice(7, 10);
+  // TOP STORIES — next 3 after the above-fold articles (overlap is fine, serves as content reinforcement)
+  const topStories = remaining.slice(2, 5);
   const topGrid = document.getElementById('top-stories-grid');
   if (topGrid) {
     topGrid.innerHTML = topStories.map(a => `
