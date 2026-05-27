@@ -18,7 +18,7 @@
     .page-hero { background: var(--color-primary); color: #fff; padding: var(--space-12) var(--space-8); text-align: center; }
     .page-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 900; color: #fff; margin-bottom: var(--space-4); }
     .page-hero p { font-family: var(--font-sans); font-size: var(--text-base); opacity: 0.8; max-width: 52ch; margin: 0 auto; }
-    .static-content { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-8); }
+    .static-content { max-width: 760px; margin: 0 auto; padding: var(--space-12) var(--space-8); }
     .static-content h2 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; margin: var(--space-10) 0 var(--space-4); color: var(--color-text); border-bottom: 2px solid var(--color-primary); padding-bottom: var(--space-2); }
     .static-content h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; margin: var(--space-6) 0 var(--space-3); color: var(--color-text); }
     .static-content p { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-5); }
@@ -26,21 +26,98 @@
     .static-content li { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-2); }
     .static-content blockquote { border-left: 4px solid var(--color-primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; background: var(--color-surface); font-style: italic; color: var(--color-text-muted); }
     .static-content a { color: var(--color-primary); text-decoration: underline; }
-    .book-card { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: var(--space-4); background: var(--color-surface); }
-    .book-spine { width: 52px; height: 76px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 9px; font-weight: 700; text-align: center; letter-spacing: 0.05em; color: #fff; padding: 4px; line-height: 1.2; }
-    .book-info h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin: 0 0 var(--space-1); }
-    .book-info .author { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-2); }
-    .book-info p { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: 1.5; }
-    .contact-form { display: flex; flex-direction: column; gap: var(--space-4); }
-    .contact-form label { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); display: block; }
-    .contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-base); box-sizing: border-box; }
-    .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--color-primary); border-color: var(--color-primary); }
-    .contact-form textarea { min-height: 140px; resize: vertical; }
-    .contact-form button { background: var(--color-primary); color: #fff; border: none; padding: var(--space-3) var(--space-8); font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); border-radius: var(--radius-sm); cursor: pointer; letter-spacing: 0.04em; align-self: flex-start; }
-    .contact-form button:hover { background: #7a1515; }
-    .theology-card { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); margin-bottom: var(--space-5); border-left: 4px solid var(--color-primary); }
-    .theology-card h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; margin: 0 0 var(--space-3); }
-    .tip-note { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-6); font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; font-style: italic; }
+
+    /* Book Card */
+    .book-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: var(--space-5);
+      padding: var(--space-5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-5);
+      background: var(--color-surface);
+      align-items: start;
+    }
+    .book-cover-wrap {
+      position: relative;
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .book-cover-wrap img {
+      width: 100px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      box-shadow: 2px 3px 8px rgba(0,0,0,0.25);
+    }
+    .book-info { display: flex; flex-direction: column; gap: var(--space-2); }
+    .book-info h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin: 0; line-height: 1.3; }
+    .book-info .book-author { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; font-weight: 500; }
+    .book-info .book-blurb { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: 1.6; }
+    .amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-primary);
+      color: #fff !important;
+      padding: 7px 14px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      text-decoration: none !important;
+      font-size: var(--text-sm);
+      margin-top: var(--space-2);
+      transition: background 0.15s;
+      width: fit-content;
+    }
+    .amazon-btn:hover { background: #7a1515 !important; }
+    .amazon-btn svg { flex-shrink: 0; }
+
+    /* Historically Curious section — list with Amazon links */
+    .curious-list { list-style: none; padding: 0; margin-bottom: var(--space-5); }
+    .curious-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .curious-list li:last-child { border-bottom: none; }
+    .curious-cover {
+      width: 54px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 2px;
+      flex-shrink: 0;
+      box-shadow: 1px 2px 5px rgba(0,0,0,0.2);
+    }
+    .curious-info { flex: 1; }
+    .curious-info strong { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 700; display: block; margin-bottom: 2px; }
+    .curious-info .curious-author { font-family: var(--font-sans); font-size: 12px; color: var(--color-text-muted); margin-bottom: var(--space-1); }
+    .curious-info .curious-blurb { font-size: 13px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-2); }
+    .amazon-btn-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--color-primary);
+      color: #fff !important;
+      padding: 5px 10px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      text-decoration: none !important;
+      font-size: 11px;
+      transition: background 0.15s;
+    }
+    .amazon-btn-sm:hover { background: #7a1515 !important; }
+
+    @media (max-width: 500px) {
+      .book-card { grid-template-columns: 80px 1fr; gap: var(--space-3); }
+      .book-cover-wrap img { width: 80px; height: 120px; }
+      .book-cover-wrap { width: 80px; }
+    }
   </style>
 </head>
 <body data-page="recommended-reading">
@@ -98,86 +175,175 @@
 
     <h2>Start Here</h2>
 
+    <!-- 1. Sproul -->
     <div class="book-card">
-      <div class="book-spine" style="background:#9b1c1c;">The Last Days According to Jesus</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_sproul.jpg" alt="The Last Days According to Jesus book cover" />
+      </div>
       <div class="book-info">
         <h3>The Last Days According to Jesus</h3>
-        <div class="author">R.C. Sproul</div>
-        <p>The most accessible introduction to partial preterism from one of the 20th century's most trusted Reformed theologians. Sproul wrestles honestly with Matthew 24 and concludes that most of it was fulfilled in AD 70. Essential first read.</p>
+        <div class="book-author">R.C. Sproul</div>
+        <p class="book-blurb">The most accessible introduction to partial preterism from one of the 20th century's most trusted Bible teachers. Sproul wrestles honestly with Matthew 24 and concludes that most of it was fulfilled in AD 70. Essential first read.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0801092191" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 2. DeMar LDM -->
     <div class="book-card">
-      <div class="book-spine" style="background:#1a3a5c;">Last Days Madness</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_demar_ldm.jpg" alt="Last Days Madness book cover" />
+      </div>
       <div class="book-info">
         <h3>Last Days Madness</h3>
-        <div class="author">Gary DeMar</div>
-        <p>A comprehensive and often hilarious demolition of newspaper exegesis and date-setting. DeMar catalogs decades of failed predictions and traces them to a faulty hermeneutic. Excellent for sharing with your dispensationalist uncle.</p>
+        <div class="book-author">Gary DeMar</div>
+        <p class="book-blurb">A comprehensive and often hilarious demolition of newspaper exegesis and date-setting. DeMar catalogs decades of failed predictions and traces them to a faulty hermeneutic. Excellent for sharing with your dispensationalist uncle.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0915815354" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 3. Gentry HSHD -->
     <div class="book-card">
-      <div class="book-spine" style="background:#b8860b;">He Shall Have Dominion</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_gentry_hshd.jpg" alt="He Shall Have Dominion book cover" />
+      </div>
       <div class="book-info">
         <h3>He Shall Have Dominion</h3>
-        <div class="author">Kenneth Gentry</div>
-        <p>The definitive systematic defense of postmillennialism. Dense, thorough, and rewarding. Gentry covers the biblical, historical, and theological case for a victorious, Kingdom-advancing eschatology.</p>
+        <div class="book-author">Kenneth Gentry</div>
+        <p class="book-blurb">The definitive systematic defense of postmillennialism. Dense, thorough, and rewarding. Gentry covers the biblical, historical, and theological case for a victorious, Kingdom-advancing eschatology. The comprehensive reference on postmill thought.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0978937643" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
     <h2>Go Deeper</h2>
 
+    <!-- 4. Chilton -->
     <div class="book-card">
-      <div class="book-spine" style="background:#2d5a2d;">Paradise Restored</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_chilton.jpg" alt="Paradise Restored book cover" />
+      </div>
       <div class="book-info">
         <h3>Paradise Restored</h3>
-        <div class="author">David Chilton</div>
-        <p>A warm, pastoral, and richly biblical case for postmillennialism. Chilton writes with joy and theological depth. More accessible than Gentry and equally convincing.</p>
+        <div class="book-author">David Chilton</div>
+        <p class="book-blurb">A warm, pastoral, and richly biblical case for postmillennialism. Chilton writes with joy and theological depth, tracing the story of God's dominion mandate from creation to consummation. More accessible than Gentry and equally convincing.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0915815087" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 5. Gentry BJF -->
     <div class="book-card">
-      <div class="book-spine" style="background:#4a2c6e;">Before Jerusalem Fell</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_gentry_bjf.jpg" alt="Before Jerusalem Fell book cover" />
+      </div>
       <div class="book-info">
         <h3>Before Jerusalem Fell</h3>
-        <div class="author">Kenneth Gentry</div>
-        <p>A detailed scholarly argument that the book of Revelation was written before AD 70, which dramatically changes how you read it. Technical but essential for serious students.</p>
+        <div class="book-author">Kenneth Gentry</div>
+        <p class="book-blurb">A detailed scholarly argument that the book of Revelation was written before AD 70, which dramatically changes how you read it. Gentry marshals historical, internal, and external evidence to establish the early date. Technical but essential for serious students.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0978937651" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 6. DeMar ETF -->
     <div class="book-card">
-      <div class="book-spine" style="background:#5a3a1a;">End Times Fiction</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_demar_etf.jpg" alt="End Times Fiction book cover" />
+      </div>
       <div class="book-info">
         <h3>End Times Fiction</h3>
-        <div class="author">Gary DeMar</div>
-        <p>A point-by-point response to the Left Behind series, tracing its theological assumptions and showing where they depart from historic, orthodox Christianity. Gracious, witty, and well-documented.</p>
+        <div class="book-author">Gary DeMar</div>
+        <p class="book-blurb">A point-by-point response to the Left Behind series, examining the theological assumptions behind Tim LaHaye's claim that the novels are "the first fictional portrayal of prophetic events true to literal Bible prophecy." DeMar responds graciously, wittily, and with thorough documentation.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/0785264353" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 7. Wilson HM -->
     <div class="book-card">
-      <div class="book-spine" style="background:#8b3a00;">Heaven Misplaced</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_wilson_hm.jpg" alt="Heaven Misplaced book cover" />
+      </div>
       <div class="book-info">
         <h3>Heaven Misplaced: Christ's Kingdom on Earth</h3>
-        <div class="author">Douglas Wilson</div>
-        <p>Wilson makes the postmillennial case with his signature wit and pastoral directness. One of the most readable and enjoyable introductions to a victorious, Kingdom-advancing eschatology — especially for readers who find academic theology heavy going.</p>
+        <div class="book-author">Douglas Wilson</div>
+        <p class="book-blurb">Wilson makes the postmillennial case with his signature wit and pastoral directness. One of the most readable and enjoyable introductions to a victorious, Kingdom-advancing eschatology — especially for readers who find academic theology heavy going. Short chapters, discussion questions included.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/1591280834" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
+    <!-- 8. Wilson WTMCA -->
     <div class="book-card">
-      <div class="book-spine" style="background:#3a3a6e;">When the Man Comes Around</div>
+      <div class="book-cover-wrap">
+        <img src="images/book_cover_wilson_wtmca.jpg" alt="When the Man Comes Around book cover" />
+      </div>
       <div class="book-info">
         <h3>When the Man Comes Around</h3>
-        <div class="author">Douglas Wilson</div>
-        <p>Wilson's treatment of biblical eschatology covering the Second Coming, resurrection, and final judgment from a postmillennial perspective. Clear, convictional, and characteristically unafraid to disagree with the consensus. A fitting companion to <em>Heaven Misplaced</em>.</p>
+        <div class="book-author">Douglas Wilson</div>
+        <p class="book-blurb">Wilson's passage-by-passage commentary on the book of Revelation, showing how John's most notorious prophecies concern the fall of Jerusalem in AD 70. Convictional, clear, and characteristically unafraid to take the preterist reading seriously. A fitting companion to <em>Heaven Misplaced</em>.</p>
+        <a class="amazon-btn" href="https://www.amazon.com/dp/1947644920" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Buy on Amazon
+        </a>
       </div>
     </div>
 
     <h2>For the Historically Curious</h2>
     <p>If you want to understand how dispensationalism became the dominant eschatology of American evangelicalism — and why it is historically quite recent — these resources are invaluable:</p>
-    <ul>
-      <li><strong>Barbara Rossing</strong> — <em>The Rapture Exposed</em> (a readable historical and theological critique)</li>
-      <li><strong>Timothy Weber</strong> — <em>On the Road to Armageddon</em> (academic history of dispensationalism in America)</li>
-      <li><strong>Iain Murray</strong> — <em>The Puritan Hope</em> (recovering the postmillennial optimism of the Reformers and Puritans)</li>
+
+    <ul class="curious-list">
+      <li>
+        <img class="curious-cover" src="images/book_cover_rossing.jpg" alt="The Rapture Exposed book cover" />
+        <div class="curious-info">
+          <strong>The Rapture Exposed</strong>
+          <div class="curious-author">Barbara Rossing</div>
+          <div class="curious-blurb">A readable historical and theological critique of Rapture theology from a New Testament scholar. Rossing traces the origins of dispensationalism and offers a compelling alternative vision of hope rooted in Revelation's actual message.</div>
+          <a class="amazon-btn-sm" href="https://www.amazon.com/dp/0813343143" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Buy on Amazon
+          </a>
+        </div>
+      </li>
+      <li>
+        <div class="curious-info" style="padding-left: 0;">
+          <strong>On the Road to Armageddon</strong>
+          <div class="curious-author">Timothy Weber</div>
+          <div class="curious-blurb">Academic history of dispensationalism in America — how a relatively new 19th-century theological system became the default eschatology of American evangelical Christianity. Scholarly but accessible, and eye-opening.</div>
+          <a class="amazon-btn-sm" href="https://www.amazon.com/s?k=On+the+Road+to+Armageddon+Timothy+Weber" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Search on Amazon
+          </a>
+        </div>
+      </li>
+      <li>
+        <img class="curious-cover" src="images/book_cover_murray.jpg" alt="The Puritan Hope book cover" />
+        <div class="curious-info">
+          <strong>The Puritan Hope</strong>
+          <div class="curious-author">Iain Murray</div>
+          <div class="curious-blurb">Recovers the postmillennial optimism of the Reformers and Puritans, showing that the gloomy end-times pessimism of modern evangelicalism is historically anomalous. If your tradition has roots in historic Protestant Christianity, this book is especially illuminating.</div>
+          <a class="amazon-btn-sm" href="https://www.amazon.com/dp/1848714786" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Buy on Amazon
+          </a>
+        </div>
+      </li>
     </ul>
 
     <blockquote>"For the earth will be filled with the knowledge of the glory of the Lord as the waters cover the sea." — Habakkuk 2:14. This is not a caption for a retreat. It is a promise about history.</blockquote>
