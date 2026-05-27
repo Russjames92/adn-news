@@ -258,9 +258,12 @@ function renderHomepage(articles) {
   const hero = articles[0];
   const heroEl = document.getElementById('hero-story');
   if (heroEl && hero) {
+    const heroImgHtml = hero.img_url
+      ? `<img src="${hero.img_url}" alt="${safe(hero.headline)}" loading="eager" />`
+      : articleImg(hero, 'hero');
     heroEl.innerHTML = `
       <div class="hero-story-image">
-        ${articleImg(hero, 'hero')}
+        ${heroImgHtml}
       </div>
       <div class="hero-story-content">
         <span class="category-badge ${badgeClass(hero.category)}">${safe(hero.category_label)}</span>
