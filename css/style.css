@@ -1203,7 +1203,19 @@
   .prophecy-meter-inner { flex-wrap: wrap; gap: var(--space-3); padding: 0; }
   .prophecy-meter-caption { display: none; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-  .masthead-date-line { flex-direction: column; gap: var(--space-2); text-align: center; }
+  /* Mobile masthead: hide flanking elements, center logo only */
+  .masthead-date-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: var(--space-2);
+  }
+  .masthead-date-line .edition-label { display: none; }
+  .masthead-date-line .masthead-header-controls { display: none; }
+  .masthead-logo-link { margin: 0 auto; }
+  .site-logo-img { height: 100px; }
+  .masthead-tagline-row { padding: var(--space-1) 0 var(--space-1); }
+  .site-subtitle { padding-top: var(--space-1); }
   .opinion-strip-inner { padding: 0 var(--space-4); }
   .nav-link { padding: var(--space-3) var(--space-4); font-size: 0.75rem; }
 }
