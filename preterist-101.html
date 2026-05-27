@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preterist 101 — ADN News</title>
+  <meta name="description" content="A beginner's guide to partial preterism — the view that most Bible prophecy was fulfilled in the first century." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .satire-watermark { position: fixed; bottom: var(--space-4); right: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: var(--space-2) var(--space-4); font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); z-index: 100; pointer-events: none; box-shadow: var(--shadow-sm); }
+    .page-hero { background: var(--color-primary); color: #fff; padding: var(--space-12) var(--space-8); text-align: center; }
+    .page-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 900; color: #fff; margin-bottom: var(--space-4); }
+    .page-hero p { font-family: var(--font-sans); font-size: var(--text-base); opacity: 0.8; max-width: 52ch; margin: 0 auto; }
+    .static-content { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-8); }
+    .static-content h2 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; margin: var(--space-10) 0 var(--space-4); color: var(--color-text); border-bottom: 2px solid var(--color-primary); padding-bottom: var(--space-2); }
+    .static-content h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; margin: var(--space-6) 0 var(--space-3); color: var(--color-text); }
+    .static-content p { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-5); }
+    .static-content ul, .static-content ol { padding-left: var(--space-6); margin-bottom: var(--space-5); }
+    .static-content li { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-2); }
+    .static-content blockquote { border-left: 4px solid var(--color-primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; background: var(--color-surface); font-style: italic; color: var(--color-text-muted); }
+    .static-content a { color: var(--color-primary); text-decoration: underline; }
+    .book-card { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: var(--space-4); background: var(--color-surface); }
+    .book-spine { width: 52px; height: 76px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 9px; font-weight: 700; text-align: center; letter-spacing: 0.05em; color: #fff; padding: 4px; line-height: 1.2; }
+    .book-info h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin: 0 0 var(--space-1); }
+    .book-info .author { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-2); }
+    .book-info p { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+    .contact-form { display: flex; flex-direction: column; gap: var(--space-4); }
+    .contact-form label { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); display: block; }
+    .contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-base); box-sizing: border-box; }
+    .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--color-primary); border-color: var(--color-primary); }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+    .contact-form button { background: var(--color-primary); color: #fff; border: none; padding: var(--space-3) var(--space-8); font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); border-radius: var(--radius-sm); cursor: pointer; letter-spacing: 0.04em; align-self: flex-start; }
+    .contact-form button:hover { background: #7a1515; }
+    .theology-card { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); margin-bottom: var(--space-5); border-left: 4px solid var(--color-primary); }
+    .theology-card h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; margin: 0 0 var(--space-3); }
+    .tip-note { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-6); font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; font-style: italic; }
+  </style>
+</head>
+<body data-page="preterist-101">
+<div class="satire-watermark">Satire</div>
+
+<div class="top-bar" role="banner" aria-hidden="true">
+  <div class="top-bar-ticker"><div class="ticker-items">
+    <span><span class="ticker-label">Breaking</span> Local man updates Rapture countdown clock for 47th consecutive year</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Update</span> Kingdom of God still growing, sources confirm</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Breaking</span> Prophecy conference postponed pending updated generation length estimates</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Developing</span> Third Temple gift shop opens; tableware arrives ahead of tabernacle</span>
+  </div></div>
+</div>
+
+<header class="site-header">
+  <div class="masthead-inner">
+    <div class="masthead-date-line">
+      <span class="edition-label">Eschatology Edition</span>
+      <span class="masthead-live-date"></span>
+      <div class="masthead-header-controls">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="site-nameplate">
+      <a href="index.html" aria-label="ADN News — Home">
+        <img src="images/logo.png" alt="ADN News" class="site-logo-img" />
+      </a>
+      <p class="site-subtitle">Eschatology Reporting for the Discerning Believer</p>
+      <p class="site-tagline">"Any Day Now" — est. 1948 (give or take a generation)</p>
+    </div>
+  </div>
+</header>
+<nav class="primary-nav" aria-label="Main navigation">
+  <div class="primary-nav-inner">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="breaking.html" class="nav-link">Breaking News</a>
+    <a href="prophecy-watch.html" class="nav-link">Prophecy Watch</a>
+    <a href="israel.html" class="nav-link">What's Happening in Israel</a>
+    <a href="index.html#opinion" class="nav-link">Opinion</a>
+    <a href="index.html#about" class="nav-link">About ADN</a>
+  </div>
+</nav>
+<main>
+  <div class="page-hero">
+    <h1>Preterist 101</h1>
+    <p>Most of Matthew 24 already happened. Here's why that's actually great news.</p>
+  </div>
+  <div class="static-content">
+    <p>"Preterism" comes from the Latin <em>praeter</em>, meaning "past." A preterist believes that the bulk of biblical prophecy — particularly the Olivet Discourse (Matthew 24, Mark 13, Luke 21) and much of Revelation — was fulfilled in the past, specifically in the events surrounding the destruction of Jerusalem in AD 70.</p>
+
+    <h2>Two Types of Preterism</h2>
+    <div class="theology-card">
+      <h3>Full Preterism (we are not this)</h3>
+      <p>Believes all prophecy — including the Second Coming and the resurrection — was fulfilled in AD 70. This view is outside orthodox Christianity and is rejected by ADN News.</p>
+    </div>
+    <div class="theology-card">
+      <h3>Partial Preterism (this is us)</h3>
+      <p>Believes most first-century prophecy was fulfilled in AD 70, but that the bodily Second Coming, the general resurrection, and the final judgment are still future. This is the view of R.C. Sproul, Kenneth Gentry, Gary DeMar, and others in the Reformed tradition.</p>
+    </div>
+
+    <h2>The Key Text: Matthew 24</h2>
+    <p>Jesus's Olivet Discourse begins with the disciples admiring the Temple. Jesus says it will be completely destroyed — "not one stone here will be left on another" (Matthew 24:2). The disciples ask when this will happen and what the sign of his coming will be.</p>
+    <p>Jesus describes wars, famines, persecution, the abomination of desolation, false prophets, and tribulation. Then he says: <strong>"Truly I tell you, this generation will certainly not pass away until all these things have happened" (Matthew 24:34).</strong></p>
+    <p>Dispensationalists must redefine "this generation" to mean something other than the people Jesus was speaking to. Partial preterists take Jesus at his word: he was describing events that would occur within a generation (roughly 40 years) of his ministry. In AD 70, Roman general Titus besieged Jerusalem, destroyed the Temple (exactly as Jesus predicted — not one stone left on another), and killed or enslaved over a million Jewish people. Every sign Jesus described was fulfilled.</p>
+
+    <h2>What About Revelation?</h2>
+    <p>Revelation opens with the words: "The revelation of Jesus Christ, which God gave him to show his servants what must soon take place" (Revelation 1:1). And: "Blessed is the one who reads aloud the words of this prophecy... because the time is near" (Revelation 1:3).</p>
+    <p>Partial preterists take "soon" and "near" to mean what they say. Kenneth Gentry's <em>Before Jerusalem Fell</em> argues extensively that Revelation was written before AD 70, making it a prophetic book addressed to seven first-century churches facing an imminent crisis — not a code book for 21st century geopolitics.</p>
+
+    <h2>Why Does This Matter?</h2>
+    <p>If most prophecy is already fulfilled, the church is not in a defensive crouch waiting for things to get worse. We are on the winning side of a completed cosmic transaction. Christ has all authority. The gospel is advancing. History has a direction, and it is toward the Kingdom of God covering the earth. That is not pessimism with a rescue clause — it is triumphant, joyful, world-transforming hope.</p>
+
+    <blockquote>"Truly I tell you, this generation will certainly not pass away until all these things have happened." — Matthew 24:34. He meant it. He was right.</blockquote>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-site-name">ADN News</div><p>Any Day Now — est. 1948 (give or take a generation). Satirical eschatology reporting for the postmillennial age.</p></div>
+      <div class="footer-col"><h4>Sections</h4><ul><li><a href="breaking.html">Breaking News</a></li><li><a href="prophecy-watch.html">Prophecy Watch</a></li><li><a href="israel.html">What's Happening in Israel</a></li><li><a href="index.html#opinion">Opinion</a></li></ul></div>
+      <div class="footer-col"><h4>About</h4><ul><li><a href="index.html#about">About ADN</a></li><li><a href="index.html#submit">Submit a Tip</a></li><li><a href="our-theology.html">Our Theology</a></li><li><a href="recommended-reading.html">Recommended Reading</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="postmill-primer.html">Postmill Primer</a></li><li><a href="preterist-101.html">Preterist 101</a></li><li><a href="why-we-left-dispytown.html">Why We Left Dispytown</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ADN News is entirely satirical. All headlines, stories, and persons are fictional. &copy; 2026 ADN News — Any Day Now.</p>
+      <p>Satire &middot; Faith &middot; Kingdom</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

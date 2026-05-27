@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Theology — ADN News</title>
+  <meta name="description" content="What ADN News actually believes — postmillennial, partial preterist, and unapologetically hopeful." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .satire-watermark { position: fixed; bottom: var(--space-4); right: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: var(--space-2) var(--space-4); font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); z-index: 100; pointer-events: none; box-shadow: var(--shadow-sm); }
+    .page-hero { background: var(--color-primary); color: #fff; padding: var(--space-12) var(--space-8); text-align: center; }
+    .page-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 900; color: #fff; margin-bottom: var(--space-4); }
+    .page-hero p { font-family: var(--font-sans); font-size: var(--text-base); opacity: 0.8; max-width: 52ch; margin: 0 auto; }
+    .static-content { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-8); }
+    .static-content h2 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; margin: var(--space-10) 0 var(--space-4); color: var(--color-text); border-bottom: 2px solid var(--color-primary); padding-bottom: var(--space-2); }
+    .static-content h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; margin: var(--space-6) 0 var(--space-3); color: var(--color-text); }
+    .static-content p { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-5); }
+    .static-content ul, .static-content ol { padding-left: var(--space-6); margin-bottom: var(--space-5); }
+    .static-content li { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.75; color: var(--color-text); margin-bottom: var(--space-2); }
+    .static-content blockquote { border-left: 4px solid var(--color-primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; background: var(--color-surface); font-style: italic; color: var(--color-text-muted); }
+    .static-content a { color: var(--color-primary); text-decoration: underline; }
+    .book-card { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: var(--space-4); background: var(--color-surface); }
+    .book-spine { width: 52px; height: 76px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 9px; font-weight: 700; text-align: center; letter-spacing: 0.05em; color: #fff; padding: 4px; line-height: 1.2; }
+    .book-info h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; margin: 0 0 var(--space-1); }
+    .book-info .author { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-2); }
+    .book-info p { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+    .contact-form { display: flex; flex-direction: column; gap: var(--space-4); }
+    .contact-form label { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); display: block; }
+    .contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-base); box-sizing: border-box; }
+    .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--color-primary); border-color: var(--color-primary); }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+    .contact-form button { background: var(--color-primary); color: #fff; border: none; padding: var(--space-3) var(--space-8); font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); border-radius: var(--radius-sm); cursor: pointer; letter-spacing: 0.04em; align-self: flex-start; }
+    .contact-form button:hover { background: #7a1515; }
+    .theology-card { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); margin-bottom: var(--space-5); border-left: 4px solid var(--color-primary); }
+    .theology-card h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; margin: 0 0 var(--space-3); }
+    .tip-note { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-6); font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; font-style: italic; }
+  </style>
+</head>
+<body data-page="our-theology">
+<div class="satire-watermark">Satire</div>
+
+<div class="top-bar" role="banner" aria-hidden="true">
+  <div class="top-bar-ticker"><div class="ticker-items">
+    <span><span class="ticker-label">Breaking</span> Local man updates Rapture countdown clock for 47th consecutive year</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Update</span> Kingdom of God still growing, sources confirm</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Breaking</span> Prophecy conference postponed pending updated generation length estimates</span>
+    <span>&#8195;&bull;&#8195;</span>
+    <span><span class="ticker-label">Developing</span> Third Temple gift shop opens; tableware arrives ahead of tabernacle</span>
+  </div></div>
+</div>
+
+<header class="site-header">
+  <div class="masthead-inner">
+    <div class="masthead-date-line">
+      <span class="edition-label">Eschatology Edition</span>
+      <span class="masthead-live-date"></span>
+      <div class="masthead-header-controls">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="site-nameplate">
+      <a href="index.html" aria-label="ADN News — Home">
+        <img src="images/logo.png" alt="ADN News" class="site-logo-img" />
+      </a>
+      <p class="site-subtitle">Eschatology Reporting for the Discerning Believer</p>
+      <p class="site-tagline">"Any Day Now" — est. 1948 (give or take a generation)</p>
+    </div>
+  </div>
+</header>
+<nav class="primary-nav" aria-label="Main navigation">
+  <div class="primary-nav-inner">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="breaking.html" class="nav-link">Breaking News</a>
+    <a href="prophecy-watch.html" class="nav-link">Prophecy Watch</a>
+    <a href="israel.html" class="nav-link">What's Happening in Israel</a>
+    <a href="index.html#opinion" class="nav-link">Opinion</a>
+    <a href="index.html#about" class="nav-link">About ADN</a>
+  </div>
+</nav>
+<main>
+  <div class="page-hero">
+    <h1>Our Theology</h1>
+    <p>What we actually believe — because every satirist has a confession of faith.</p>
+  </div>
+  <div class="static-content">
+    <p>ADN News exists to satirize bad eschatology with love, not contempt. But satire without conviction is just snark. Here is what we believe, stated plainly, so you know what we're actually aiming for.</p>
+
+    <h2>We Are Postmillennialists</h2>
+    <p>We believe the Kingdom of God is not a future emergency evacuation plan — it is a present, growing reality. Jesus declared, "All authority in heaven and on earth has been given to me" (Matthew 28:18), and he gave that declaration before he sent the church into the world. The Great Commission is not a holding pattern; it is a conquest strategy. The mustard seed becomes a tree. The leaven fills the whole loaf. The knowledge of the Lord covers the earth as the waters cover the sea (Habakkuk 2:14).</p>
+    <p>We expect history to end in triumph, not in a last-minute helicopter extraction. The nations are being discipled. The church is growing. Christ is reigning now, at the right hand of the Father, and he will reign until every enemy is made a footstool (1 Corinthians 15:25).</p>
+
+    <h2>We Are Partial Preterists</h2>
+    <p>We believe that most of the prophetic passages cited in end-times conferences — Matthew 24, much of Revelation, the Olivet Discourse — were fulfilled in the events surrounding the destruction of Jerusalem in AD 70. Jesus said "this generation will not pass away" (Matthew 24:34), and he meant the generation he was speaking to. He was right. He is always right.</p>
+    <p>This is not a new or fringe view. It was held by John Calvin, John Owen, Matthew Henry, and more recently by R.C. Sproul, Kenneth Gentry, Gary DeMar, and David Chilton. The Left Behind industry is the fringe. We are the boring mainstream.</p>
+
+    <h2>What We Are Not</h2>
+    <div class="theology-card">
+      <h3>Not Full Preterists</h3>
+      <p>We believe the Second Coming, the bodily resurrection, and the final judgment are still future. We are <em>partial</em> preterists — most prophecy is fulfilled; not all of it.</p>
+    </div>
+    <div class="theology-card">
+      <h3>Not Anti-Israel</h3>
+      <p>We love the Jewish people. We believe God's covenant faithfulness is unimpeachable. We simply don't believe that requires reading every Middle East news cycle through Daniel 9.</p>
+    </div>
+    <div class="theology-card">
+      <h3>Not Contemptuous of Dispensationalists</h3>
+      <p>Many of us were once dispensationalists. Most of our family still are. We love them. We just think they are wrong about this particular thing, and we'd rather laugh about it together than argue about it at Thanksgiving.</p>
+    </div>
+
+    <h2>Recommended Theologians</h2>
+    <ul>
+      <li><strong>R.C. Sproul</strong> — <em>The Last Days According to Jesus</em></li>
+      <li><strong>Kenneth Gentry</strong> — <em>He Shall Have Dominion</em>, <em>Before Jerusalem Fell</em></li>
+      <li><strong>Gary DeMar</strong> — <em>Last Days Madness</em>, <em>End Times Fiction</em></li>
+      <li><strong>David Chilton</strong> — <em>Paradise Restored</em>, <em>Days of Vengeance</em></li>
+      <li><strong>Greg Bahnsen</strong> — <em>Victory in Jesus</em></li>
+    </ul>
+
+    <blockquote>"The earth is the Lord's, and everything in it." — Psalm 24:1. This is a present tense statement, not a future hope.</blockquote>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-site-name">ADN News</div><p>Any Day Now — est. 1948 (give or take a generation). Satirical eschatology reporting for the postmillennial age.</p></div>
+      <div class="footer-col"><h4>Sections</h4><ul><li><a href="breaking.html">Breaking News</a></li><li><a href="prophecy-watch.html">Prophecy Watch</a></li><li><a href="israel.html">What's Happening in Israel</a></li><li><a href="index.html#opinion">Opinion</a></li></ul></div>
+      <div class="footer-col"><h4>About</h4><ul><li><a href="index.html#about">About ADN</a></li><li><a href="index.html#submit">Submit a Tip</a></li><li><a href="our-theology.html">Our Theology</a></li><li><a href="recommended-reading.html">Recommended Reading</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="postmill-primer.html">Postmill Primer</a></li><li><a href="preterist-101.html">Preterist 101</a></li><li><a href="why-we-left-dispytown.html">Why We Left Dispytown</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ADN News is entirely satirical. All headlines, stories, and persons are fictional. &copy; 2026 ADN News — Any Day Now.</p>
+      <p>Satire &middot; Faith &middot; Kingdom</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
