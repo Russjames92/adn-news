@@ -121,7 +121,7 @@
 
 /* Image logo */
 .site-logo-img {
-  height: 90px;
+  height: 160px;
   width: auto;
   display: block;
 }
@@ -129,10 +129,10 @@
 /* Dark mode logo swap is handled by JS (updateLogos in main.js) — no CSS filter needed */
 
 @media (max-width: 768px) {
-  .site-logo-img { height: 70px; }
+  .site-logo-img { height: 120px; }
 }
 @media (max-width: 480px) {
-  .site-logo-img { height: 54px; }
+  .site-logo-img { height: 90px; }
 }
 
 .site-subtitle {
