@@ -82,8 +82,8 @@ const ARTICLES_URL = 'articles.json';
         tickerEl.style.transform = 'translateX(-' + pos + 'px)';
         requestAnimationFrame(tick);
       }
-      // Wait 2 frames for layout to fully settle before measuring
-      requestAnimationFrame(function() { requestAnimationFrame(measure); });
+      // setTimeout 0 guarantees browser has fully laid out the new innerHTML
+      setTimeout(measure, 50);
     })
     .catch(function() {});
 })();
