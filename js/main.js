@@ -147,12 +147,12 @@ function articleImg(a, size) {
     // For other sizes: use fixed-height wrapper as before
     if (size === 'hero') {
       return `<div class="article-photo-wrap article-photo-wrap--hero" style="position:absolute;inset:0;overflow:hidden;background:#111;">
-        <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="eager" />
+        <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="eager" onerror="this.style.display='none'" />
         ${attr}
       </div>`;
     }
     return `<div class="article-photo-wrap" style="position:relative;width:100%;height:${h};overflow:hidden;background:#111;">
-      <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+      <img src="${a.img_url}" alt="${a.headline}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" onerror="this.style.display='none'" />
       ${attr}
     </div>`;
   }
