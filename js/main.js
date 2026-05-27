@@ -218,6 +218,34 @@ function renderHomepage(articles) {
     `).join('');
   }
 
+  // OPINION SECTION — 3 most recent articles displayed as opinion cards
+  const opinionCards = document.getElementById('opinion-cards');
+  if (opinionCards) {
+    const authorMeta = {
+      'Chester T. Rapture':   { initials: 'CT', color: 'var(--color-primary)',  title: 'Senior Eschatology Correspondent' },
+      'Donna Prebulation':    { initials: 'DP', color: '#7a4f9b',               title: 'Tribulation Desk Reporter' },
+      'Norman Dispensation':  { initials: 'ND', color: 'var(--color-gold)',     title: 'Prophetic Timeline Specialist' },
+      'Priscilla Millstone':  { initials: 'PM', color: 'var(--color-blue)',     title: 'Kingdom Advancement Reporter' },
+    };
+    const opinionPool = articles.slice(0, 6); // use 3 of the most recent
+    opinionCards.innerHTML = opinionPool.slice(0, 3).map(a => {
+      const m = authorMeta[a.author] || { initials: a.author.split(' ').map(w=>w[0]).join('').slice(0,2), color: 'var(--color-primary)', title: 'Correspondent' };
+      return `
+        <div class="opinion-card" onclick="location.href='article.html?slug=${a.slug}'" style="cursor:pointer;">
+          <div class="opinion-author-line">
+            <div class="avatar-initials" style="background:${m.color};">${m.initials}</div>
+            <div>
+              <div class="opinion-author-name">${a.author}</div>
+              <div class="opinion-author-title">${m.title}</div>
+            </div>
+          </div>
+          <h3 class="opinion-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h3>
+          <p class="opinion-card-excerpt">${a.deck}</p>
+        </div>
+      `;
+    }).join('');
+  }
+
   // ISRAEL SECTION
   const israelGrid = document.getElementById('israel-grid');
   if (israelGrid) {
