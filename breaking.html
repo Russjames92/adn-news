@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaking News — ADN News</title>
+  <meta name="description" content="The latest breaking end-times developments, as they happen (or don't)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .satire-watermark { position: fixed; bottom: var(--space-4); right: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: var(--space-2) var(--space-4); font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); z-index: 100; pointer-events: none; box-shadow: var(--shadow-sm); }
+    .category-hero { background: var(--color-primary); color: #fff; padding: var(--space-12) var(--space-8); text-align: center; }
+    .category-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 900; color: #fff; margin-bottom: var(--space-4); }
+    .category-hero p { font-family: var(--font-sans); font-size: var(--text-base); opacity: 0.8; max-width: 48ch; margin: 0 auto; }
+    .article-list { display: flex; flex-direction: column; gap: 0; }
+    .article-list-item { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider); align-items: start; cursor: pointer; }
+    .article-list-item:hover .ali-headline { color: var(--color-primary); }
+    .ali-image { height: 140px; border-radius: 0; overflow: hidden; }
+    .ali-image .placeholder-img { min-height: 140px; }
+    .ali-content { display: flex; flex-direction: column; gap: var(--space-3); }
+    .ali-headline { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; line-height: 1.25; transition: color var(--transition-interactive); }
+    .ali-deck { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+    .ali-meta { font-family: var(--font-sans); font-size: var(--text-xs); color: var(--color-text-faint); }
+    .placeholder-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 140px; }
+    .img-breaking { background: linear-gradient(135deg, #2a1a00 0%, #6b4200 40%, #3a2000 100%); }
+    .img-prophecy { background: linear-gradient(135deg, #5c1a1a 0%, #8b2020 40%, #3a0a0a 100%); }
+    .img-kingdom { background: linear-gradient(135deg, #0a2a0a 0%, #1a5c1a 40%, #0a3a0a 100%); }
+    @media (max-width: 640px) { .article-list-item { grid-template-columns: 1fr; } .ali-image { display: none; } }
+  </style>
+</head>
+<body>
+<div class="satire-watermark">Satire</div>
+
+<div class="top-bar" role="banner" aria-hidden="true">
+  <div class="top-bar-ticker"><div class="ticker-items">
+    <span><span class="ticker-label">Breaking</span> Local man updates Rapture countdown clock for 47th consecutive year</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Update</span> Kingdom of God still growing, sources confirm</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Breaking</span> Local man updates Rapture countdown clock for 47th consecutive year</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Update</span> Kingdom of God still growing, sources confirm</span>
+  </div></div>
+</div>
+
+<header class="site-header">
+  <div class="masthead-inner">
+    <div class="masthead-date-line">
+      <span class="edition-label">Eschatology Edition</span>
+      <span class="masthead-live-date">Tuesday, May 26, 2026</span>
+      <div class="masthead-header-controls">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="site-nameplate">
+      <a href="index.html">
+        <svg width="48" height="28" viewBox="0 0 72 40" fill="none" aria-hidden="true"><circle cx="36" cy="20" r="16" stroke="currentColor" stroke-width="2.5" fill="none"/><line x1="36" y1="20" x2="36" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="36" y1="20" x2="43" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><line x1="36" y1="5" x2="36" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div class="site-title">ADN News</div>
+      </a>
+      <p class="site-subtitle">Eschatology Reporting for the Discerning Believer</p>
+    </div>
+  </div>
+</header>
+<nav class="primary-nav" aria-label="Main navigation">
+  <div class="primary-nav-inner">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="breaking.html" class="nav-link active nav-highlight">Breaking News</a>
+    <a href="prophecy-watch.html" class="nav-link">Prophecy Watch</a>
+    <a href="israel.html" class="nav-link">What's Happening in Israel</a>
+    <a href="index.html#opinion" class="nav-link">Opinion</a>
+    <a href="index.html#about" class="nav-link">About ADN</a>
+  </div>
+</nav>
+
+<main>
+  <div class="category-hero">
+    <h1>Breaking News</h1>
+    <p>The most urgent eschatological developments, updated continuously since 1948.</p>
+  </div>
+
+  <div class="page-wrap">
+    <div class="article-list">
+
+      <div class="article-list-item">
+        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
+          <h2 class="ali-headline"><a href="article.html">Local Prophecy Conference Postponed After Host Realizes 'This Generation' Has Now Passed Three Times</a></h2>
+          <p class="ali-deck">Organizers announce "brief indefinite delay" while recalibrating generational math for the third time.</p>
+          <span class="ali-meta">Chester T. Rapture · May 26, 2026 · 4 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-prophecy"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
+          <h2 class="ali-headline"><a href="article.html">Man Sells House to Prepare for Rapture — Again</a></h2>
+          <p class="ali-deck">Gary Whitfield of Cedar Rapids has now liquidated his assets ahead of the Rapture on four separate occasions, maintaining an impressive record of zero for four.</p>
+          <span class="ali-meta">Donna Prebulation · May 25, 2026 · 3 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
+          <h2 class="ali-headline"><a href="article.html">Church Cancels Capital Campaign — "No Point If We're Leaving Soon"</a></h2>
+          <p class="ali-deck">Elders of First Baptist End Times Fellowship vote unanimously to table the building fund for the sixth consecutive year, citing imminent departure.</p>
+          <span class="ali-meta">Chester T. Rapture · May 24, 2026 · 2 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-kingdom"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Kingdom Report</span>
+          <h2 class="ali-headline"><a href="article.html">Kingdom of God Reports Record Expansion for 2,000th Consecutive Year</a></h2>
+          <p class="ali-deck">Annual growth report goes largely unnoticed by prophecy media due to absence of any associated catastrophe.</p>
+          <span class="ali-meta">Priscilla Millstone · May 23, 2026 · 3 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-breaking" style="font-size:10px; padding: 1px 6px; width:fit-content;">Breaking</span>
+          <h2 class="ali-headline"><a href="article.html">New Christian Movie About the Rapture Features Slightly Better Special Effects Than Last 47</a></h2>
+          <p class="ali-deck">Hollywood insiders note that the ascending believers now look "mostly like real people" rather than "someone's screensaver from 2003."</p>
+          <span class="ali-meta">Chester T. Rapture · May 22, 2026 · 2 min read</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-site-name">ADN News</div><p>Any Day Now — est. 1948. Satirical eschatology reporting for the postmillennial age.</p></div>
+      <div class="footer-col"><h4>Sections</h4><ul><li><a href="breaking.html">Breaking News</a></li><li><a href="prophecy-watch.html">Prophecy Watch</a></li><li><a href="israel.html">Israel Watch</a></li></ul></div>
+      <div class="footer-col"><h4>About</h4><ul><li><a href="index.html#about">About ADN</a></li><li><a href="#">Our Theology</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="#">Postmill Primer</a></li><li><a href="#">Preterist 101</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ADN News is entirely satirical. All headlines, stories, and persons are fictional. &copy; 2026 ADN News — Any Day Now.</p>
+      <p>Satire · Faith · Kingdom</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

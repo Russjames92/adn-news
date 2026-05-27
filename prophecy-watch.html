@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prophecy Watch — ADN News</title>
+  <meta name="description" content="We watch the prophecies so you don't have to. Updated whenever a blood moon, EU development, or vaguely significant event occurs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .satire-watermark { position: fixed; bottom: var(--space-4); right: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: var(--space-2) var(--space-4); font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); z-index: 100; pointer-events: none; box-shadow: var(--shadow-sm); }
+    .category-hero { background: var(--color-gold); color: #fff; padding: var(--space-12) var(--space-8); text-align: center; }
+    .category-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 900; color: #fff; margin-bottom: var(--space-4); }
+    .category-hero p { font-family: var(--font-sans); font-size: var(--text-base); opacity: 0.85; max-width: 52ch; margin: 0 auto; }
+    .article-list { display: flex; flex-direction: column; gap: 0; }
+    .article-list-item { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider); align-items: start; cursor: pointer; }
+    .article-list-item:hover .ali-headline { color: var(--color-gold); }
+    .ali-image { height: 140px; overflow: hidden; }
+    .ali-image .placeholder-img { min-height: 140px; }
+    .ali-content { display: flex; flex-direction: column; gap: var(--space-3); }
+    .ali-headline { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; line-height: 1.25; transition: color var(--transition-interactive); }
+    .ali-deck { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+    .ali-meta { font-family: var(--font-sans); font-size: var(--text-xs); color: var(--color-text-faint); }
+    .placeholder-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 140px; }
+    .img-prophecy { background: linear-gradient(135deg, #5c1a1a 0%, #8b2020 40%, #3a0a0a 100%); }
+    .img-breaking { background: linear-gradient(135deg, #2a1a00 0%, #6b4200 40%, #3a2000 100%); }
+    @media (max-width: 640px) { .article-list-item { grid-template-columns: 1fr; } .ali-image { display: none; } }
+  </style>
+</head>
+<body>
+<div class="satire-watermark">Satire</div>
+
+<div class="top-bar" role="banner" aria-hidden="true">
+  <div class="top-bar-ticker"><div class="ticker-items">
+    <span><span class="ticker-label">Watch</span> Blood moon sighting triggers emergency prophecy conference in Tulsa</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Watch</span> Israel does something — prophecy experts agree it means everything</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Watch</span> Blood moon sighting triggers emergency prophecy conference in Tulsa</span>
+    <span>&#8195;•&#8195;</span>
+    <span><span class="ticker-label">Watch</span> Israel does something — prophecy experts agree it means everything</span>
+  </div></div>
+</div>
+
+<header class="site-header">
+  <div class="masthead-inner">
+    <div class="masthead-date-line">
+      <span class="edition-label">Eschatology Edition</span>
+      <span class="masthead-live-date">Tuesday, May 26, 2026</span>
+      <div class="masthead-header-controls">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="site-nameplate">
+      <a href="index.html">
+        <svg width="48" height="28" viewBox="0 0 72 40" fill="none" aria-hidden="true"><circle cx="36" cy="20" r="16" stroke="currentColor" stroke-width="2.5" fill="none"/><line x1="36" y1="20" x2="36" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="36" y1="20" x2="43" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><line x1="36" y1="5" x2="36" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div class="site-title">ADN News</div>
+      </a>
+      <p class="site-subtitle">Eschatology Reporting for the Discerning Believer</p>
+    </div>
+  </div>
+</header>
+<nav class="primary-nav" aria-label="Main navigation">
+  <div class="primary-nav-inner">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="breaking.html" class="nav-link nav-highlight">Breaking News</a>
+    <a href="prophecy-watch.html" class="nav-link active" style="background: var(--color-gold);">Prophecy Watch</a>
+    <a href="israel.html" class="nav-link">What's Happening in Israel</a>
+    <a href="index.html#opinion" class="nav-link">Opinion</a>
+    <a href="index.html#about" class="nav-link">About ADN</a>
+  </div>
+</nav>
+
+<main>
+  <div class="category-hero">
+    <h1>Prophecy Watch</h1>
+    <p>We watch the signs so you don't have to. Monitoring blood moons, EU power consolidation, barcode technology, and newspaper Bible exegesis since 1970.</p>
+  </div>
+
+  <div class="page-wrap">
+    <div class="article-list">
+
+      <div class="article-list-item">
+        <div class="ali-image img-prophecy"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-prophecy" style="font-size:10px; padding: 1px 6px; width:fit-content;">Prophecy Watch</span>
+          <h2 class="ali-headline"><a href="article.html">Theologian Spends 40 Years Mapping Antichrist Candidates; Retires With Extensive List of People Who Were Not the Antichrist</a></h2>
+          <p class="ali-deck">Dr. Norman Futurist's 900-page retrospective, "I Was So Sure," offers a detailed inventory of historical leaders, politicians, and at least one Pope who turned out to be fine.</p>
+          <span class="ali-meta">Chester T. Rapture · May 22, 2026 · 3 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-prophecy" style="font-size:10px; padding: 1px 6px; width:fit-content;">Prophecy Watch</span>
+          <h2 class="ali-headline"><a href="article.html">New Prophecy Chart Adds 14 Dispensations to Previous 7, Includes "Pre-Pre-Tribulation" Period</a></h2>
+          <p class="ali-deck">The expanded Scofield-Plus framework now accounts for what theologians are calling "the age of chart-making," which may itself be a dispensation.</p>
+          <span class="ali-meta">Norman Dispensation · May 21, 2026 · 2 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-prophecy"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-prophecy" style="font-size:10px; padding: 1px 6px; width:fit-content;">Prophecy Watch</span>
+          <h2 class="ali-headline"><a href="article.html">Hal Lindsey's 'Late Great Planet Earth' Gets 14th Revised Edition — Same Predictions, Updated Cover Art</a></h2>
+          <p class="ali-deck">Publisher confirms the foreword now explains why the 1970 deadline was "more of a directional signal than a hard date."</p>
+          <span class="ali-meta">Chester T. Rapture · May 20, 2026 · 3 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-breaking"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-prophecy" style="font-size:10px; padding: 1px 6px; width:fit-content;">Prophecy Watch</span>
+          <h2 class="ali-headline"><a href="article.html">New Bible Code Discovers Same End-Times Pattern for 13th Consecutive Year</a></h2>
+          <p class="ali-deck">Researchers note that the matrix, when interpreted with enough flexibility, can also predict last week's NFL scores.</p>
+          <span class="ali-meta">Donna Prebulation · May 19, 2026 · 2 min read</span>
+        </div>
+      </div>
+
+      <div class="article-list-item">
+        <div class="ali-image img-prophecy"><div class="placeholder-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.25"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+        <div class="ali-content">
+          <span class="category-badge badge-prophecy" style="font-size:10px; padding: 1px 6px; width:fit-content;">Prophecy Watch</span>
+          <h2 class="ali-headline"><a href="article.html">Dispensationalist Shocked to Learn Early Church Did Not Anticipate 7-Year Tribulation</a></h2>
+          <p class="ali-deck">Seminary student's discovery of patristic writings triggers what sources describe as "a very uncomfortable Tuesday."</p>
+          <span class="ali-meta">Chester T. Rapture · May 18, 2026 · 4 min read</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-site-name">ADN News</div><p>Any Day Now — est. 1948. Satirical eschatology reporting for the postmillennial age.</p></div>
+      <div class="footer-col"><h4>Sections</h4><ul><li><a href="breaking.html">Breaking News</a></li><li><a href="prophecy-watch.html">Prophecy Watch</a></li><li><a href="israel.html">Israel Watch</a></li></ul></div>
+      <div class="footer-col"><h4>About</h4><ul><li><a href="index.html#about">About ADN</a></li><li><a href="#">Our Theology</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="#">Postmill Primer</a></li><li><a href="#">Preterist 101</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ADN News is entirely satirical. &copy; 2026 ADN News — Any Day Now.</p>
+      <p>Satire · Faith · Kingdom</p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
