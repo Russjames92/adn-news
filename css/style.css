@@ -812,10 +812,11 @@
    ============================================================ */
 
 .site-footer {
-  background: var(--color-text);
-  color: var(--color-text-inverse);
+  background: #161210;
+  color: rgba(255,255,255,0.75);
   padding: var(--space-12) var(--space-8) var(--space-6);
   margin-top: var(--space-16);
+  border-top: 3px solid var(--color-primary);
 }
 
 .footer-inner {
