@@ -141,10 +141,14 @@ function articleImg(a, size) {
   return `<div class="${a.img_class}" style="width:100%;height:${h};display:flex;align-items:center;justify-content:center;">${ic}</div>`;
 }
 
-// ── SAFE TEXT HELPER ────────────────────────────────────────────────────────
+// ── SAFE TEXT HELPERS ───────────────────────────────────────────────────────
 // Prevents $ signs and backticks in article text from breaking template literals
 function safe(str) {
   return (str || '').replace(/`/g, '\u0060').replace(/\$/g, '&#36;');
+}
+// Encodes a slug for safe use in data-attributes and href values
+function safeSlug(slug) {
+  return encodeURIComponent(slug || '');
 }
 
 // ── ARTICLE PAGE RENDERER ────────────────────────────────────────────────────
@@ -215,11 +219,11 @@ function renderArticlePage(articles) {
         <h2 style="font-family:var(--font-sans);font-size:var(--text-sm);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">More From ADN News</h2>
         <div class="related-grid">
           ${articles.filter(x => x.slug !== slug).slice(0, 3).map(r => `
-            <div class="related-card">
+            <div class="related-card" data-slug="${safeSlug(r.slug)}" style="cursor:pointer;">
               ${articleImg(r, 'thumb')}
-              <span class="cat" style="font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-faint);">${r.category_label}</span>
+              <span class="cat" style="font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-faint);">${safe(r.category_label)}</span>
               <h3 style="font-family:var(--font-display);font-size:var(--text-base);font-weight:700;line-height:1.3;transition:color var(--transition-interactive);">
-                <a href="article.html?slug=${r.slug}" style="transition:color var(--transition-interactive);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color=''">${r.headline}</a>
+                <a href="article.html?slug=${safeSlug(r.slug)}">${safe(r.headline)}</a>
               </h3>
             </div>
           `).join('')}
@@ -240,17 +244,17 @@ function renderHomepage(articles) {
         ${articleImg(hero, 'hero')}
       </div>
       <div class="hero-story-content">
-        <span class="category-badge ${badgeClass(hero.category)}">${hero.category_label}</span>
-        <h1 class="hero-headline"><a href="article.html?slug=${hero.slug}">${hero.headline}</a></h1>
-        <p class="hero-deck">${hero.deck}</p>
+        <span class="category-badge ${badgeClass(hero.category)}">${safe(hero.category_label)}</span>
+        <h1 class="hero-headline"><a href="article.html?slug=${safeSlug(hero.slug)}">${safe(hero.headline)}</a></h1>
+        <p class="hero-deck">${safe(hero.deck)}</p>
         <div class="story-meta">
-          <span class="author">By ${hero.author}</span>
+          <span class="author">By ${safe(hero.author)}</span>
           <span class="divider">|</span>
-          <span>${hero.date_label}</span>
+          <span>${safe(hero.date_label)}</span>
           <span class="divider">|</span>
-          <span>${hero.read_time}</span>
+          <span>${safe(hero.read_time)}</span>
         </div>
-        <a href="article.html?slug=${hero.slug}" class="read-more-btn">Read Full Story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="article.html?slug=${safeSlug(hero.slug)}" class="read-more-btn">Read Full Story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     `;
   }
@@ -260,12 +264,12 @@ function renderHomepage(articles) {
   const topGrid = document.getElementById('top-stories-grid');
   if (topGrid) {
     topGrid.innerHTML = topStories.map(a => `
-      <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
+      <article class="story-card" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
         <div class="story-card-image">${articleImg(a, 'card')}</div>
-        <span class="category-badge ${badgeClass(a.category)}">${a.category_label}</span>
-        <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
-        <p class="story-card-deck">${a.deck}</p>
-        <div class="story-card-meta"><span>${a.date_label}</span> · <span>${a.read_time}</span></div>
+        <span class="category-badge ${badgeClass(a.category)}">${safe(a.category_label)}</span>
+        <h2 class="story-card-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h2>
+        <p class="story-card-deck">${safe(a.deck)}</p>
+        <div class="story-card-meta"><span>${safe(a.date_label)}</span> · <span>${safe(a.read_time)}</span></div>
       </article>
     `).join('');
   }
@@ -274,11 +278,11 @@ function renderHomepage(articles) {
   const sidebarList = document.getElementById('most-prophesied-list');
   if (sidebarList) {
     sidebarList.innerHTML = articles.slice(0, 5).map((a, i) => `
-      <li class="story-list-item" onclick="location.href='article.html?slug=${a.slug}'" style="cursor:pointer;">
+      <li class="story-list-item" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
         <span class="story-list-num">${i + 1}</span>
         <div class="story-list-content">
-          <a href="article.html?slug=${a.slug}" class="story-list-headline">${a.headline}</a>
-          <span class="story-list-meta">${a.category_label} · ${a.date_label.split(' ').slice(0, 2).join(' ')}</span>
+          <a href="article.html?slug=${safeSlug(a.slug)}" class="story-list-headline">${safe(a.headline)}</a>
+          <span class="story-list-meta">${safe(a.category_label)} · ${safe(a.date_label.split(' ').slice(0, 2).join(' '))}</span>
         </div>
       </li>
     `).join('');
@@ -289,12 +293,12 @@ function renderHomepage(articles) {
   if (pwGrid) {
     const pw = articles.filter(a => a.category === 'prophecy').slice(0, 3);
     pwGrid.innerHTML = pw.map(a => `
-      <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
+      <article class="story-card" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
         <div class="story-card-image">${articleImg(a, 'card')}</div>
-        <span class="category-badge badge-prophecy">${a.category_label}</span>
-        <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
-        <p class="story-card-deck">${a.deck}</p>
-        <div class="story-card-meta"><span>${a.date_label}</span> · <span>${a.read_time}</span></div>
+        <span class="category-badge badge-prophecy">${safe(a.category_label)}</span>
+        <h2 class="story-card-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h2>
+        <p class="story-card-deck">${safe(a.deck)}</p>
+        <div class="story-card-meta"><span>${safe(a.date_label)}</span> · <span>${safe(a.read_time)}</span></div>
       </article>
     `).join('');
   }
@@ -312,16 +316,16 @@ function renderHomepage(articles) {
     opinionCards.innerHTML = opinionPool.slice(0, 3).map(a => {
       const m = authorMeta[a.author] || { initials: a.author.split(' ').map(w=>w[0]).join('').slice(0,2), color: 'var(--color-primary)', title: 'Correspondent' };
       return `
-        <div class="opinion-card" onclick="location.href='article.html?slug=${a.slug}'" style="cursor:pointer;">
+        <div class="opinion-card" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
           <div class="opinion-author-line">
             <div class="avatar-initials" style="background:${m.color};">${m.initials}</div>
             <div>
-              <div class="opinion-author-name">${a.author}</div>
+              <div class="opinion-author-name">${safe(a.author)}</div>
               <div class="opinion-author-title">${m.title}</div>
             </div>
           </div>
-          <h3 class="opinion-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h3>
-          <p class="opinion-card-excerpt">${a.deck}</p>
+          <h3 class="opinion-card-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h3>
+          <p class="opinion-card-excerpt">${safe(a.deck)}</p>
         </div>
       `;
     }).join('');
@@ -332,15 +336,25 @@ function renderHomepage(articles) {
   if (israelGrid) {
     const il = articles.filter(a => a.category === 'israel').slice(0, 3);
     israelGrid.innerHTML = il.map(a => `
-      <article class="story-card" onclick="location.href='article.html?slug=${a.slug}'">
+      <article class="story-card" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
         <div class="story-card-image">${articleImg(a, 'card')}</div>
-        <span class="category-badge badge-israel">${a.category_label}</span>
-        <h2 class="story-card-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
-        <p class="story-card-deck">${a.deck}</p>
-        <div class="story-card-meta"><span>${a.date_label}</span></div>
+        <span class="category-badge badge-israel">${safe(a.category_label)}</span>
+        <h2 class="story-card-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h2>
+        <p class="story-card-deck">${safe(a.deck)}</p>
+        <div class="story-card-meta"><span>${safe(a.date_label)}</span></div>
       </article>
     `).join('');
   }
+
+  // Delegated click handler for all data-slug cards
+  document.addEventListener('click', function (e) {
+    const card = e.target.closest('[data-slug]');
+    if (!card) return;
+    // Don't intercept if they clicked an <a> link directly
+    if (e.target.closest('a')) return;
+    const slug = card.dataset.slug;
+    if (slug) location.href = 'article.html?slug=' + slug;
+  });
 
   initFadeIn();
 }
@@ -351,13 +365,13 @@ function renderCategoryPage(articles, catFilter) {
   if (!listEl) return;
   const filtered = catFilter === 'all' ? articles : articles.filter(a => a.category === catFilter);
   listEl.innerHTML = filtered.map(a => `
-    <div class="article-list-item" onclick="location.href='article.html?slug=${a.slug}'">
+    <div class="article-list-item" data-slug="${safeSlug(a.slug)}" style="cursor:pointer;">
       <div class="ali-image">${articleImg(a, 'list')}</div>
       <div class="ali-content">
-        <span class="category-badge ${badgeClass(a.category)}" style="font-size:10px;padding:1px 6px;width:fit-content;">${a.category_label}</span>
-        <h2 class="ali-headline"><a href="article.html?slug=${a.slug}">${a.headline}</a></h2>
-        <p class="ali-deck">${a.deck}</p>
-        <span class="ali-meta">${a.author} · ${a.date_label} · ${a.read_time}</span>
+        <span class="category-badge ${badgeClass(a.category)}" style="font-size:10px;padding:1px 6px;width:fit-content;">${safe(a.category_label)}</span>
+        <h2 class="ali-headline"><a href="article.html?slug=${safeSlug(a.slug)}">${safe(a.headline)}</a></h2>
+        <p class="ali-deck">${safe(a.deck)}</p>
+        <span class="ali-meta">${safe(a.author)} · ${safe(a.date_label)} · ${safe(a.read_time)}</span>
       </div>
     </div>
   `).join('');
