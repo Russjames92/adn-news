@@ -82,7 +82,8 @@ const ARTICLES_URL = 'articles.json';
         tickerEl.style.transform = 'translateX(-' + pos + 'px)';
         requestAnimationFrame(tick);
       }
-      requestAnimationFrame(measure);
+      // Wait 2 frames for layout to fully settle before measuring
+      requestAnimationFrame(function() { requestAnimationFrame(measure); });
     })
     .catch(function() {});
 })();
