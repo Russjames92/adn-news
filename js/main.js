@@ -242,7 +242,7 @@ function renderHomepage(articles) {
     `).join('');
   }
 
-  // OPINION SECTION — 3 most recent articles displayed as opinion cards
+  // OPINION SECTION — dedicated opinion category articles
   const opinionCards = document.getElementById('opinion-cards');
   if (opinionCards) {
     const authorMeta = {
@@ -251,7 +251,7 @@ function renderHomepage(articles) {
       'Norman Dispensation':  { initials: 'ND', color: 'var(--color-gold)',     title: 'Prophetic Timeline Specialist' },
       'Priscilla Millstone':  { initials: 'PM', color: 'var(--color-blue)',     title: 'Kingdom Advancement Reporter' },
     };
-    const opinionPool = articles.slice(0, 6); // use 3 of the most recent
+    const opinionPool = articles.filter(a => a.category === 'opinion');
     opinionCards.innerHTML = opinionPool.slice(0, 3).map(a => {
       const m = authorMeta[a.author] || { initials: a.author.split(' ').map(w=>w[0]).join('').slice(0,2), color: 'var(--color-primary)', title: 'Correspondent' };
       return `
