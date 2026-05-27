@@ -121,18 +121,18 @@
 
 /* Image logo */
 .site-logo-img {
-  height: 56px;
+  height: 90px;
   width: auto;
   display: block;
 }
 
-/* Dark mode: logo works naturally — red box pops on dark bg, brighten NEWS text slightly */
-[data-theme='dark'] .site-logo-img {
-  filter: brightness(1.15) contrast(0.95);
-}
+/* Dark mode logo swap is handled by JS (updateLogos in main.js) — no CSS filter needed */
 
+@media (max-width: 768px) {
+  .site-logo-img { height: 70px; }
+}
 @media (max-width: 480px) {
-  .site-logo-img { height: 40px; }
+  .site-logo-img { height: 54px; }
 }
 
 .site-subtitle {
