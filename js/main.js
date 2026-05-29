@@ -163,7 +163,7 @@ function articleImg(a, size) {
 // ── SAFE TEXT HELPERS ───────────────────────────────────────────────────────
 // Prevents $ signs and backticks in article text from breaking template literals
 function safe(str) {
-  return (str || '').replace(/`/g, '\u0060').replace(/\$/g, '&#36;');
+  return (String(str == null ? '' : str)).replace(/`/g, '\u0060').replace(/\$/g, '&#36;');
 }
 // Encodes a slug for safe use in data-attributes and href values
 function safeSlug(slug) {
